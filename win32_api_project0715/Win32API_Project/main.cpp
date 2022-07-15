@@ -41,7 +41,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     }
 
     // Engine 초기화
-    CEngine::GetInst()->EngineInit(g_hWnd);
+    CEngine::GetInst()->EngineInit(g_hWnd, 1600, 900);
 
     HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_WIN32APIPROJECT));
 

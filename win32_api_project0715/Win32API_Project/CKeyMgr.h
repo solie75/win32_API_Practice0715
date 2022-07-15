@@ -32,6 +32,44 @@ enum class KEY_TYPE
 	N,
 	M,
 
+	ENTER,
+	ESC,
+	LSHIFT,
+	LALT,
+	LCTRL,
+	SPACE,
+
+	LEFT,
+	RIGHT,
+	UP,
+	DOWN,
+
+	LBTN,
+	RBTN,
+
+	NUM_0,
+	NUM_1,
+	NUM_2,
+	NUM_3,
+	NUM_4,
+	NUM_5,
+	NUM_6,
+	NUM_7,
+	NUM_8,
+	NUM_9,
+
+	N_0,
+	N_1,
+	N_2,
+	N_3,
+	N_4,
+	N_5,
+	N_6,
+	N_7,
+	N_8,
+	N_9,
+
+
 	END,
 };
 

@@ -58,7 +58,7 @@ void CTimeMgr::TimeMgrRender(HDC _dc)
 		swprintf_s(szFloat, 50, L"DeltaTime : %f", FPS);
 		int iLen = wcsnlen_s(szFloat, 50);
 
-		SetWindowText(hWnd, szFloat);
+		SetWindowTextW(hWnd, szFloat);
 		m_AccTime = 0.f;
 	}
 
