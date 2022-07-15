@@ -11,6 +11,9 @@ private:
 	//윈도우 해상도 설정
 	POINT m_pResolution;
 
+	HBITMAP m_hSecondBitmap; // 두번째 비트맵
+	HDC m_hSecondDC; // 두번쩨 DC
+
 public:
 	HWND GetInstance() { return m_hMainWnd; };
 

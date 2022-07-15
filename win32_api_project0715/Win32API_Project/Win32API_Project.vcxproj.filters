@@ -56,6 +56,9 @@
     <Filter Include="Game\02.Manager\CollisionMgr">
       <UniqueIdentifier>{f0e7ca84-f032-41fe-94b8-2223f6d6d8f8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\04.Object\Missile">
+      <UniqueIdentifier>{5499e056-5652-445d-ba11-aa3101db37d2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -103,6 +106,9 @@
     <ClInclude Include="CKeyMgr.h">
       <Filter>Game\02.Manager\05.KeyMgr</Filter>
     </ClInclude>
+    <ClInclude Include="CMissile.h">
+      <Filter>Game\04.Object\Missile</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Win32API_Project.rc">
@@ -144,6 +150,9 @@
     </ClCompile>
     <ClCompile Include="CKeyMgr.cpp">
       <Filter>Game\02.Manager\05.KeyMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="CMissile.cpp">
+      <Filter>Game\04.Object\Missile</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

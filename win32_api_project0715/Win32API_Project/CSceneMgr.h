@@ -13,5 +13,7 @@ public:
 
 	void CSceneMgrTick();
 	void CSceneMgrRender(HDC _dc);
+
+	CScene* GetCurScene() { return m_pCurScene; }
 };
 

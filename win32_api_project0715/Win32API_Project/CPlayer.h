@@ -5,6 +5,7 @@ class CPlayer :
 {
 public:
     float m_fSpeed;
+    float m_AccTime;
 
 public:
     virtual void ObjTick() override;
