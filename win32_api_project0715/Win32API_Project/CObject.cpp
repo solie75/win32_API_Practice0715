@@ -1,5 +1,11 @@
 #include "stdafx.h"
 #include "CObject.h"
+#include "CComponent.h"
+
+void CObject::AddComponent(CComponent* _pComponent)
+{
+	m_arrComponent[(UINT)COMPONENT_TYPE::COLLIDER] = _pComponent;
+}
 
 void CObject::ObjRender(HDC _dc)
 {

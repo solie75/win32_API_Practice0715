@@ -43,14 +43,14 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -78,9 +78,11 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(SolutionDir)OutPut\bin_debug\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(SolutionDir)OutPut\bin\</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -141,11 +143,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="CComponent.h" />
     <ClInclude Include="CEngine.h" />
+    <ClInclude Include="CImage.h" />
     <ClInclude Include="CKeyMgr.h" />
     <ClInclude Include="CMissile.h" />
     <ClInclude Include="CObject.h" />
+    <ClInclude Include="CPathMgr.h" />
     <ClInclude Include="CPlayer.h" />
+    <ClInclude Include="CResMgr.h" />
+    <ClInclude Include="CResource.h" />
     <ClInclude Include="CScene.h" />
     <ClInclude Include="CSceneMgr.h" />
     <ClInclude Include="CScene_Logo.h" />
@@ -159,11 +166,16 @@
     <ClInclude Include="Win32API_Project.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CComponent.cpp" />
     <ClCompile Include="CEngine.cpp" />
+    <ClCompile Include="CImage.cpp" />
     <ClCompile Include="CKeyMgr.cpp" />
     <ClCompile Include="CMissile.cpp" />
     <ClCompile Include="CObject.cpp" />
+    <ClCompile Include="CPathMgr.cpp" />
     <ClCompile Include="CPlayer.cpp" />
+    <ClCompile Include="CResMgr.cpp" />
+    <ClCompile Include="CResource.cpp" />
     <ClCompile Include="CScene.cpp" />
     <ClCompile Include="CSceneMgr.cpp" />
     <ClCompile Include="CScene_Logo.cpp" />

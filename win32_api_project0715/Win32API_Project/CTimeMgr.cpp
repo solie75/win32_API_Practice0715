@@ -1,4 +1,4 @@
-#include "stdafx.h"
+﻿#include "stdafx.h"
 #include "cTimeMgr.h"
 #include "CEngine.h"
 
@@ -56,7 +56,7 @@ void CTimeMgr::TimeMgrRender(HDC _dc)
 		float FPS = 1.f / m_DeltaTime;
 
 		swprintf_s(szFloat, 50, L"DeltaTime : %f", FPS);
-		int iLen = wcsnlen_s(szFloat, 50);
+		int iLen = (int)wcsnlen_s(szFloat, 50);
 
 		SetWindowTextW(hWnd, szFloat);
 		m_AccTime = 0.f;

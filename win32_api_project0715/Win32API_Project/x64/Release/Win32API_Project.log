@@ -1,0 +1,25 @@
+﻿  CEngine.cpp
+  CImage.cpp
+D:\git\win32_0715\win32_api_project0715\Win32API_Project\CImage.cpp(8,12): warning C4244: '초기화 중': 'float'에서 'UINT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\git\win32_0715\win32_api_project0715\Win32API_Project\CImage.cpp(9,13): warning C4244: '초기화 중': 'float'에서 'UINT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  CKeyMgr.cpp
+  CMissile.cpp
+  CObject.cpp
+  CPlayer.cpp
+  CResMgr.cpp
+  CResource.cpp
+  CScene.cpp
+  CSceneMgr.cpp
+  CScene_Logo.cpp
+  CTimeMgr.cpp
+  main.cpp
+LINK : warning C4727: 타임스탬프가 동일한 d:\git\win32_0715\win32_api_project0715\win32api_project\x64\release\win32api_project.pch PCH가 d:\git\win32_0715\win32_api_project0715\win32api_project\x64\release\ckeymgr.obj 및 d:\git\win32_0715\win32_api_project0715\win32api_project\x64\release\cimage.obj에 있습니다.  첫 번째 PCH를 사용합니다.
+LINK : warning C4727: 타임스탬프가 동일한 d:\git\win32_0715\win32_api_project0715\win32api_project\x64\release\win32api_project.pch PCH가 d:\git\win32_0715\win32_api_project0715\win32api_project\x64\release\cplayer.obj 및 d:\git\win32_0715\win32_api_project0715\win32api_project\x64\release\cobject.obj에 있습니다.  첫 번째 PCH를 사용합니다.
+LINK : warning C4727: 타임스탬프가 동일한 d:\git\win32_0715\win32_api_project0715\win32api_project\x64\release\win32api_project.pch PCH가 d:\git\win32_0715\win32_api_project0715\win32api_project\x64\release\cresource.obj 및 d:\git\win32_0715\win32_api_project0715\win32api_project\x64\release\cresmgr.obj에 있습니다.  첫 번째 PCH를 사용합니다.
+LINK : warning C4727: 타임스탬프가 동일한 d:\git\win32_0715\win32_api_project0715\win32api_project\x64\release\win32api_project.pch PCH가 d:\git\win32_0715\win32_api_project0715\win32api_project\x64\release\cscenemgr.obj 및 d:\git\win32_0715\win32_api_project0715\win32api_project\x64\release\cscene.obj에 있습니다.  첫 번째 PCH를 사용합니다.
+LINK : warning C4727: 타임스탬프가 동일한 d:\git\win32_0715\win32_api_project0715\win32api_project\x64\release\win32api_project.pch PCH가 d:\git\win32_0715\win32_api_project0715\win32api_project\x64\release\ctimemgr.obj 및 d:\git\win32_0715\win32_api_project0715\win32api_project\x64\release\cscene_logo.obj에 있습니다.  첫 번째 PCH를 사용합니다.
+  코드를 생성하고 있습니다.
+  Previous IPDB not found, fall back to full compilation.
+  All 380 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  코드를 생성했습니다.
+  Win32API_Project.vcxproj -> D:\git\win32_0715\win32_api_project0715\OutPut\bin\Win32API_Project.exe

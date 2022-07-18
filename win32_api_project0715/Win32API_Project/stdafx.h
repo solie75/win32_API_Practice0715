@@ -16,3 +16,5 @@ using std::wstring;
 
 #include "struct.h"
 #include "def.h"
+
+#pragma comment(lib, "Msimg32.lib")

@@ -24,6 +24,28 @@ enum SCENE_TYPE
 #define IsTap(KEY) KEY_STATE::TAP == CKeyMgr::GetInst()->GetKeyState(KEY)
 #define IsRelease(KEY) KEY_STATE::RELEASE == CKeyMgr::GetInst()->GetKeyState(KEY)
 
+enum class PEN_COLOR
+{
+	RED,
+	BLUE,
+	GREEN,
 
-// 커밋실험 중입니다
-// 커밋실험 중입니다222
+	END,
+};
+
+enum class BRUSH_COLOR
+{
+	HOLLOW,
+	BLACK,
+	GRAY,
+
+	END,
+};
+
+enum class COMPONENT_TYPE
+{
+	COLLIDER,
+	ANIMATOR,
+	GRAVITY,
+	END,
+};
