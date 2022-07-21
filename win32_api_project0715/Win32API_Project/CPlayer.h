@@ -13,6 +13,9 @@ public:
 public:
     virtual void ObjTick() override;
     virtual void ObjRender(HDC _dc) override;
+
+public:
+    virtual CPlayer* Clone() { return new CPlayer(*this); }
 public:
     CPlayer();
     ~CPlayer();

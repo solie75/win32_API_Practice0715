@@ -145,6 +145,12 @@
     <ClInclude Include="CComponent.h">
       <Filter>Game\05.Component</Filter>
     </ClInclude>
+    <ClInclude Include="CCollider.h">
+      <Filter>Game\05.Component\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="CAnimator.h">
+      <Filter>Game\05.Component\Animator</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Win32API_Project.rc">
@@ -204,6 +210,12 @@
     </ClCompile>
     <ClCompile Include="CComponent.cpp">
       <Filter>Game\05.Component</Filter>
+    </ClCompile>
+    <ClCompile Include="CCollider.cpp">
+      <Filter>Game\05.Component\Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="CAnimator.cpp">
+      <Filter>Game\05.Component\Animator</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

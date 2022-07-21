@@ -8,11 +8,16 @@
 #include "CEngine.h"
 #include "CImage.h"
 #include "CResMgr.h"
+#include "CCollider.h"
+#include "CAnimator.h"
 
 CPlayer::CPlayer()
 	: m_fSpeed(200.f)
 	, m_AccTime(0.f)
 {
+	AddComponent(new CCollider);
+	AddComponent(new CAnimator);
+
 }
 
 CPlayer::~CPlayer()
@@ -60,6 +65,17 @@ void CPlayer::ObjTick()
 	}
 
 	SetPos(vPos);
+
+	// Tick()의 호출 과정
+	// CEngine의 EngineTick()
+	// -> CSceneMgrTick()
+	// -> ( purScene -> SceneTick() )
+	// -> ( vecObject[i] -> ObjTick() )
+	// -> ( arrComponent[i] -> ComponentTick() )
+
+	// 현재의 CPlayer::ObjTick()은 CompoenentTick()을 실행 할 수 없기 때문에
+	// 객체가 CompoenetTick()을 실행하기 위해서는 부모 클라스인 CObject의 ObjTick()을 호출해 줘야 한다.
+	CObject::ObjTick();
 }
 
 void CPlayer::ObjRender(HDC _dc) // 여기에서 들어오는 dc 는 SecondDC 이다.
@@ -76,4 +92,8 @@ void CPlayer::ObjRender(HDC _dc) // 여기에서 들어오는 dc 는 SecondDC 이다.
 	TransparentBlt(_dc, (int)vPos.x - pImage->GetWidth() / 2, (int)vPos.y - pImage->GetHeight() / 2
 		, pImage->GetWidth(), pImage->GetHeight()
 		, pImage->GetImageDC(), 0, 0, pImage->GetWidth(), pImage->GetHeight(), RGB(255, 0, 255));
+
+	// 자신의 컴포넌트들이 화면에 그려질수 도 있으니 부모 쪽의 랜더를 호출해준다.
+	CObject::ObjRender(_dc);
+
 }

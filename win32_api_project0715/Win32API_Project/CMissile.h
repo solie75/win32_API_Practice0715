@@ -11,6 +11,9 @@ public:
     virtual void ObjRender(HDC _dc) override;
 
 public:
+    virtual CMissile* Clone() { return new CMissile(*this); }
+
+public:
     CMissile();
     ~CMissile();
 };
