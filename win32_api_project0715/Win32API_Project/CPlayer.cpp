@@ -18,6 +18,8 @@ CPlayer::CPlayer()
 	AddComponent(new CCollider);
 	AddComponent(new CAnimator);
 
+	GetCollider()->SetColliderScale(Vec(50.f, 50.f));
+	GetCollider()->SetColliderOffset(Vec(0.f, 20.f));
 }
 
 CPlayer::~CPlayer()

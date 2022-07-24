@@ -2,11 +2,27 @@
 #include "CObject.h"
 #include "CComponent.h"
 
-// 객체가 새롭게 컴포넌트를 생성하면 기존의 객체가 가지고 있던 컴포넌트 배열에 컬라이더 컴포넌트를 넣는다.
+// 객체가 새롭게 컴포넌트를 생성하면 기존의 객체가 가지고 있던 컴포넌트 배열에 컴포넌트를 넣는다.
 void CObject::AddComponent(CComponent* _pComponent)
 {
 	//m_arrComponent[(UINT)COMPONENT_TYPE::COLLIDER] = _pComponent;
+	
+	// 컴포넌트 배열에 컴포넌트를 넣는 과정
+	/*객체 클래스의 생성자에서 해당 객체가 가지게 될 컴포넌트를 생성
+		AddComponent(new ~~);
+
+	동적 할당 받은 컴포넌트는
+	1. 자기 자신의 타입을 뜻하는 상수 값을 가진다. const COMPONENT_TYPE m_eType;
+	2. 자신이 어떤 객체에 속해 있는지 알기 위해 객체의 포인터를 갖는다.m_pOwner;
+
+	동적 할당 받은 컴포넌트의 주소값이
+		AddComponent의 매개 변수가된다.*/
+
+	// 새롭게 동적할 다앋은 컴포넌트를 종류에 맞는 컴포넌트 배열의 인덱스에 넣는다.
 	m_arrComponent[(UINT)_pComponent->GetComponentType()] = _pComponent;
+
+	// 해당 컴포넌트의 객체를 입력한다.
+	_pComponent->m_pOwner = this;
 }
 
 void CObject::ObjTick()
@@ -16,8 +32,6 @@ void CObject::ObjTick()
 	{
 		if (nullptr == m_arrComponent[i])
 		{
-			// 반복문에서 continue 는 그 밑의 나머지 구문을 무시하고 조건문을 이어서 실행한다.
-			// break 는 반복문을 종료한다.
 			continue;
 		}
 		m_arrComponent[i]->ComponentTick();

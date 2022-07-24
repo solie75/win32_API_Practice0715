@@ -30,8 +30,8 @@ void CMissile::ObjRender(HDC _dc)
 	Vec MissileScale = GetScale();
 
 	//  현재 _dc 의 GDIOBJ 를 변환하는 코드
-	tSelectBrush b(_dc, CEngine::GetInst() -> GetBrush(BRUSH_COLOR::GRAY));
-	tSelectPen p(_dc, CEngine::GetInst()->GetPen(PEN_COLOR::RED));
+	tSelectBrush b(_dc, BRUSH_COLOR::GRAY);
+	tSelectPen p(_dc, PEN_COLOR::RED);
 
 	//Ellipse(_dc
 	//	, (int)(MissilePos.x - MissileScale.x / 2)

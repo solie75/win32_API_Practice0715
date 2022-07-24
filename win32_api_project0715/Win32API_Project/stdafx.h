@@ -14,7 +14,10 @@ using std::make_pair;
 using std::string;
 using std::wstring;
 
-#include "struct.h"
+
 #include "def.h"
+#include "CEngine.h"
+#include "struct.h"
+
 
 #pragma comment(lib, "Msimg32.lib")

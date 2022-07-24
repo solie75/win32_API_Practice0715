@@ -5,8 +5,8 @@
 CImage::CImage()
 	: m_hBit(0)
 	, m_hDC(0)
-	, m_iWidth(0.f)
-	, m_iHeight(0.f)
+	, m_iWidth(0)
+	, m_iHeight(0)
 {
 
 }

@@ -1,12 +1,27 @@
 #include "stdafx.h"
 #include "CCollider.h"
+#include "CObject.h" // Object의 Pos 와 Scale을 알기 위해 선언
+#include "CEngine.h"
 
 void CCollider::ComponentTick()
 {
+	CObject* pOwnerObject = GetOwnerObject();
+
+	// 충돌체의 최종 위치는 객체의 위치 + 객체와 충돌체 사이의 거리와 같다.
+	m_ColliderFinalPos = pOwnerObject->GetPos() + m_ColliderOffSet;
 }
 
 void CCollider::ComponentRender(HDC _dc)
 {
+	m_ColliderFinalPos;
+	// 충돌체 영역을 초록 테두리로 표시
+	tSelectPen ColliderPen(_dc, PEN_COLOR::GREEN);
+	tSelectBrush ColliderBrush(_dc, BRUSH_COLOR::HOLLOW);
+
+	Rectangle(_dc, (int)(m_ColliderFinalPos.x - m_ColliderScale.x / 2.f)
+		, (int)(m_ColliderFinalPos.y - m_ColliderScale.y / 2.f)
+		, (int)(m_ColliderFinalPos.x + m_ColliderScale.x / 2.f)
+		, (int)(m_ColliderFinalPos.y + m_ColliderScale.y / 2.f));
 }
 
 CCollider::CCollider()
