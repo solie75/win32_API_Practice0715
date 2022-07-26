@@ -59,7 +59,7 @@ void CPlayer::ObjTick()
 			pMissile->SetPos(GetPos());
 			pMissile->SetScale(Vec(20.f, 20.f));
 
-			pCurScene->AddObject( pMissile);
+			pCurScene->AddObject( pMissile, LAYER_TYPE::PLAYER_PROJECTILE);
 
 			m_AccTime = 0.f;
 		}

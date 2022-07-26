@@ -6,7 +6,8 @@ class CMonster :
 	public CObject
 {
 private:
-	CImage* m_MonsterImage
+	CImage* m_MonsterImage;
+
 public:
 	virtual void ObjTick() override;
 	virtual void ObjRender(HDC _dc) override;

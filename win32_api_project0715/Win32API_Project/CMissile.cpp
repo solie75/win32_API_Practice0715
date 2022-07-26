@@ -1,13 +1,22 @@
 #include "stdafx.h"
 #include "CMissile.h"
-#include "CTimeMgr.h"
+
 #include "CEngine.h"
-#include "CImage.h"
+#include "CTimeMgr.h"
+
 #include "CResMgr.h"
+#include "CImage.h"
+#include "CCollider.h"
 
 CMissile::CMissile()
 	: m_MissileSpeed(400.f)
+	, MissileImage(nullptr)
 {
+	MissileImage = CResMgr::GetInst()->LoadImg(L"Missile", L"image\\missile.bmp");
+
+	AddComponent(new CCollider);
+	GetCollider()->SetColliderScale(Vec(10.f, 30.f));
+	GetCollider()->SetColliderOffset(Vec(0.f, -10.f));
 }
 
 CMissile::~CMissile()
@@ -22,6 +31,8 @@ void CMissile::ObjTick()
 	MissilePos.y -= m_MissileSpeed * DT;
 
 	SetPos(MissilePos);
+	
+	CObject::ObjTick();
 }
 
 void CMissile::ObjRender(HDC _dc)
@@ -30,27 +41,15 @@ void CMissile::ObjRender(HDC _dc)
 	Vec MissileScale = GetScale();
 
 	//  현재 _dc 의 GDIOBJ 를 변환하는 코드
-	tSelectBrush b(_dc, BRUSH_COLOR::GRAY);
-	tSelectPen p(_dc, PEN_COLOR::RED);
+	/*tSelectBrush b(_dc, BRUSH_COLOR::GRAY);
+	tSelectPen p(_dc, PEN_COLOR::RED);*/
 
-	//Ellipse(_dc
-	//	, (int)(MissilePos.x - MissileScale.x / 2)
-	//	, (int)(MissilePos.y - MissileScale.y / 2)
-	//	, (int)(MissilePos.x + MissileScale.x / 2)
-	//	, (int)(MissilePos.y + MissileScale.y / 2));
-
-	CImage* pImage = CResMgr::GetInst()->FindImg(L"PlayerImage");
-
-	if (nullptr == pImage)
-	{
-		return;
-	}
-
-	Vec vPos = GetPos();
+	//Vec vPos = GetPos();
 	//BitBlt(_dc, (int)vPos.x - 61, (int)vPos.y - 62, 123, 124, pImage->GetImageDC(), 0, 0, SRCCOPY);
-	TransparentBlt(_dc, (int)vPos.x - pImage->GetWidth() / 2, (int)vPos.y - pImage->GetHeight() / 2
-		, pImage->GetWidth(), pImage->GetHeight()
-		, pImage->GetImageDC(), 0, 0, pImage->GetWidth(), pImage->GetHeight(), RGB(255, 0, 255));
 
+	TransparentBlt(_dc, (int)MissilePos.x -( MissileImage->GetWidth() / 2), (int)MissilePos.y - (MissileImage->GetHeight() / 2)
+		, MissileImage->GetWidth(), MissileImage->GetHeight()
+		, MissileImage->GetImageDC(), 0, 0, MissileImage->GetWidth(), MissileImage->GetHeight(), RGB(255, 0, 255));
+	
 	CObject::ObjRender(_dc);
 }

@@ -63,10 +63,10 @@ void CEngine::EngineInit(HWND _hWnd, UINT _Width, UINT _Height)
 	DeleteObject(hDefaultBitmap);
 
 	// Mgr 초기화
+	CPathMgr::GetInst()->PathMgrInit();
 	CSceneMgr::GetInst()->CSceneMgrInit();
 	CTimeMgr::GetInst()->TimeMgrInit();
 	CKeyMgr::GetInst()->KeyMgrInit();
-	CPathMgr::GetInst()->PathMgrInit();
 	CResMgr::GetInst()->ResMgrInit();
 }
 

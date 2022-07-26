@@ -28,6 +28,8 @@ public:
 	HPEN GetPen(PEN_COLOR _color) { return m_arrPen[(UINT)_color]; }
 	HBRUSH GetBrush(BRUSH_COLOR _color) { return m_arrBrush[(UINT)_color]; }
 
+	POINT GetResolution() { return m_pResolution; }
+
 private:
 	void CreateDefaultGDIObject();
 };

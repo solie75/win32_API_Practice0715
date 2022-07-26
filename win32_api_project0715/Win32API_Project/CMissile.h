@@ -1,9 +1,13 @@
 #pragma once
 #include "CObject.h"
+
+class CImage;
+
 class CMissile :
     public CObject
 {
 private:
+    CImage* MissileImage;
     float m_MissileSpeed;
 
 public:
