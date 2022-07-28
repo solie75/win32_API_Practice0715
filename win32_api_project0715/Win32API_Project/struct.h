@@ -44,11 +44,23 @@ private:
 	HPEN m_hPrevPen;
 
 public:
+	tSelectPen(HDC _dc)
+		: m_hDC(_dc)
+		, m_hPrevPen(0)
+	{
+
+	}
+
 	tSelectPen(HDC _dc, PEN_COLOR _color)
 		: m_hDC(_dc)
 		, m_hPrevPen(0)
 	{
 		// SelectObject 함수는 GDI Object 교제 작업이 성공되면 DC 가 이전에 사용하고 있던 GDI Object의 핸들 값을, 실패하면 null 값을 반환.
+		m_hPrevPen = (HPEN)SelectObject(m_hDC, CEngine::GetInst()->GetPen(_color));
+	}
+
+	void SetPenColor(PEN_COLOR _color)
+	{
 		m_hPrevPen = (HPEN)SelectObject(m_hDC, CEngine::GetInst()->GetPen(_color));
 	}
 
@@ -65,6 +77,13 @@ private:
 	HBRUSH m_hPrevBrush;
 
 public:
+	tSelectBrush(HDC _dc)
+		:m_hDC(_dc)
+		, m_hPrevBrush(0)
+	{
+
+	}
+
 	tSelectBrush(HDC _dc, BRUSH_COLOR _color)
 		: m_hDC(_dc)
 		, m_hPrevBrush(0)

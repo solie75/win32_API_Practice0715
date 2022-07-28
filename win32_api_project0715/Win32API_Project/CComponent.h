@@ -1,8 +1,10 @@
 #pragma once
+#include "CEntity.h"
 
 class CObject;
 
 class CComponent
+	: public CEntity
 {
 private:
 

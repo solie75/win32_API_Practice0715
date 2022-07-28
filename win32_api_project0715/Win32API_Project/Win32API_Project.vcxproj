@@ -148,6 +148,7 @@
     <ClInclude Include="CCollisionMgr.h" />
     <ClInclude Include="CComponent.h" />
     <ClInclude Include="CEngine.h" />
+    <ClInclude Include="CEntity.h" />
     <ClInclude Include="CImage.h" />
     <ClInclude Include="CKeyMgr.h" />
     <ClInclude Include="CMissile.h" />
@@ -175,6 +176,7 @@
     <ClCompile Include="CCollisionMgr.cpp" />
     <ClCompile Include="CComponent.cpp" />
     <ClCompile Include="CEngine.cpp" />
+    <ClCompile Include="CEntity.cpp" />
     <ClCompile Include="CImage.cpp" />
     <ClCompile Include="CKeyMgr.cpp" />
     <ClCompile Include="CMissile.cpp" />

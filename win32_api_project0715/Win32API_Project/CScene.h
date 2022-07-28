@@ -1,8 +1,10 @@
 #pragma
+#include "CEntity.h"
 
 class CObject;
 
 class CScene
+	: public CEntity
 {
 private:
 	//vector<CObject*> m_vecObject;
@@ -13,6 +15,9 @@ public:
 	{
 		m_arrLayer[(UINT)_eLayer].push_back(_pObject);
 	}
+
+	// m_arrLayer 의 한 요소를 반환, 복사 비용을 만들지 않고 레퍼런스로 반환하며 동시에 원본이 손상 되지 않도록 const 화
+	const vector<CObject*>& GetObjects(LAYER_TYPE _eType) { return m_arrLayer[(UINT)_eType]; };
 public:
 	virtual void SceneInit() = 0;
 	virtual void SceneTick();

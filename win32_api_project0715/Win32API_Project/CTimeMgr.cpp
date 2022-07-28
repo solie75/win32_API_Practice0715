@@ -42,7 +42,7 @@ void CTimeMgr::TimeMgrRender(HDC _dc)
 	// ->
 	//SetWindowText(hWnd, szFloat); // 윈도우 창의 이름 부분에 FPS를 출력하는 방법 // 대신에 실시간 대신에 1초에 한번 뜨게 끔 하자
 
-	// 1초를 구하는 코그 : Deleta Time 이 프레임 한번도는 시간이니 이 것을 축적해서 1초가 넘어가면 fps 출력
+	// 1초를 구하는 코드 : Deleta Time 이 프레임 한번도는 시간이니 이 것을 축적해서 1초가 넘어가면 fps 출력
 	//1. TimeMgr 에 축적되는 시간을 뜻하는 AccTime 변수 생성
 
 	m_AccTime += m_DeltaTime;

@@ -1,9 +1,11 @@
 #pragma once
+#include "CEntity.h"
 
 class CComponent;
 class CCollider;
 
 class CObject
+	: public CEntity
 {
 private:
 

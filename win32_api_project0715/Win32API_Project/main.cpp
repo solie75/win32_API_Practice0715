@@ -4,6 +4,7 @@
 #include "stdafx.h"
 #include "Win32API_Project.h"
 #include "CEngine.h"
+#include "CEntity.h"
 
 #define MAX_LOADSTRING 100
 

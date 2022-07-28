@@ -7,6 +7,7 @@
 #include "CKeyMgr.h"
 #include "CPathMgr.h"
 #include "CResMgr.h"
+#include "CCollisionMgr.h"
 
 CEngine::CEngine()
 	: m_hMainWnd(0)
@@ -72,17 +73,30 @@ void CEngine::EngineInit(HWND _hWnd, UINT _Width, UINT _Height)
 
 void CEngine::EngineTick()
 {
+	// 순서
+	// //업데이트
+	// 1. 한번의 프레임 당 EngineTick() 호출
+	// 2. Delta time의 정의와 key 의 상태에 대한 파악
+	// 3. 현재 씬(CurScene)의 SceneTick()을 호출 -> 모든 ObjectTick() 호출 -> 각 객체의 모든 ComponentTick() 호출
+	// 4. 현재 씬의 모든 충돌 상태를 조사
+	// // 렌더링
+	// 5. 세컨드 비트맵 생성 및 그에 대한 작업 영역에 맞는 사각형 생성으로 clear
+	// 6. CSceneMgrRender() => CSceneRender() => ObjRender() => ComponentRender()
+	// 7. BitBlt() 함수로 세컨드 비트맵을 메인 비트맵에 복사
+
+
 	// 업데이트
-	CSceneMgr::GetInst()->CSceneMgrTick();
 	CTimeMgr::GetInst()->TimeMgrTick();
 	CKeyMgr::GetInst()->KeyMgrTick();
+	CSceneMgr::GetInst()->CSceneMgrTick();
+	CCollisionMgr::GetInst()->CollisionMgrTick();
 
 
 	// 렌더링
 	// clear 부분
 	HBRUSH hPrevBrush = (HBRUSH)SelectObject(m_hSecondDC, m_arrBrush[(UINT)BRUSH_COLOR::GRAY]);
 	Rectangle(m_hSecondDC, -1, -1, m_pResolution.x + 1, m_pResolution.y + 1); // 이렇게 되면 세컨드 비트맵 화면 전체가 clear 된다.
-	// 밑의 구문이 있으면 플레이어 객체가 흰색 브러쉬이고 아니면 회색 브러쉬이다
+	// 굳이 기본이 흰색인 세컨드 비트맵 생성에 회색을 넣어주고 그에 대한 반환값의 기본의 흰색을 다시 세컨드 비트맵에 넣는이유는..?
 	SelectObject(m_hSecondDC, hPrevBrush);
 
 	/*CSceneMgr::GetInst()->CSceneMgrRender(m_hDC);

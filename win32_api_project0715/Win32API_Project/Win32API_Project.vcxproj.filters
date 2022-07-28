@@ -5,9 +5,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="main">
-      <UniqueIdentifier>{c1cdf4bd-4527-48a0-b716-d8894822628e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Game">
       <UniqueIdentifier>{cc494d0a-15e5-416f-bdc3-3b6b1a4b0dc4}</UniqueIdentifier>
     </Filter>
@@ -83,19 +80,22 @@
     <Filter Include="Game\04.Object\Monster">
       <UniqueIdentifier>{12720885-01a5-4dd9-9e84-6009b0f4206a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="default">
+      <UniqueIdentifier>{c1cdf4bd-4527-48a0-b716-d8894822628e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
-      <Filter>main</Filter>
+      <Filter>default</Filter>
     </ClInclude>
     <ClInclude Include="Resource.h">
-      <Filter>main</Filter>
+      <Filter>default</Filter>
     </ClInclude>
     <ClInclude Include="targetver.h">
-      <Filter>main</Filter>
+      <Filter>default</Filter>
     </ClInclude>
     <ClInclude Include="Win32API_Project.h">
-      <Filter>main</Filter>
+      <Filter>default</Filter>
     </ClInclude>
     <ClInclude Include="CEngine.h">
       <Filter>Game\01.Engine</Filter>
@@ -110,7 +110,7 @@
       <Filter>Game\04.Object\Player</Filter>
     </ClInclude>
     <ClInclude Include="stdafx.h">
-      <Filter>main</Filter>
+      <Filter>default</Filter>
     </ClInclude>
     <ClInclude Include="def.h">
       <Filter>Game\00.Header</Filter>
@@ -160,6 +160,9 @@
     <ClInclude Include="CMonster.h">
       <Filter>Game\04.Object\Monster</Filter>
     </ClInclude>
+    <ClInclude Include="CEntity.h">
+      <Filter>Game</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Win32API_Project.rc">
@@ -175,9 +178,6 @@
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>main</Filter>
-    </ClCompile>
     <ClCompile Include="CEngine.cpp">
       <Filter>Game\01.Engine</Filter>
     </ClCompile>
@@ -231,6 +231,10 @@
     </ClCompile>
     <ClCompile Include="CMonster.cpp">
       <Filter>Game\04.Object\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="CEntity.cpp">
+      <Filter>Game</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
