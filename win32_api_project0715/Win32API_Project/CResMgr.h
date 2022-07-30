@@ -18,6 +18,7 @@ public:
 	
 public:
 	CImage* LoadImg(const wstring& _strKey, const wstring& _strPath);// 리소스가 워낙 많기에 구별하기 위해서 키를 가진다.
+	CImage* CreateImage(const wstring& _strKey, UINT _iWidth, UINT _iHeight);
 	CImage* FindImg(const wstring& _strKey);
 };
 

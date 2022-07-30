@@ -17,7 +17,7 @@ void CCollider::ComponentRender(HDC _dc)
 {
 	// 충돌 횟수 제어 오류 발생
 	// 아직 충돌을 조사 하지 않았는데 충돌 횟수가 올라가 있으면 오류
-	assert(0 <= m_iCollisionCount);
+	//assert(0 <= m_iCollisionCount);
 
 	// 상황에 따라 색이 다르게 적용되어야 하므로 HDC 만 인자로 받는 tSelectPen 이 필요
 	tSelectPen ColliderPen(_dc);
@@ -34,10 +34,12 @@ void CCollider::ComponentRender(HDC _dc)
 
 	tSelectBrush ColliderBrush(_dc, BRUSH_COLOR::HOLLOW);
 
-	Rectangle(_dc, (int)(m_ColliderFinalPos.x - m_ColliderScale.x / 2.f)
-		, (int)(m_ColliderFinalPos.y - m_ColliderScale.y / 2.f)
-		, (int)(m_ColliderFinalPos.x + m_ColliderScale.x / 2.f)
-		, (int)(m_ColliderFinalPos.y + m_ColliderScale.y / 2.f));
+	Vec vPos = CCameraMgr::GetInst()->GetRenderPos(m_ColliderFinalPos);
+
+	Rectangle(_dc, (int)(vPos.x - m_ColliderScale.x / 2.f)
+		, (int)(vPos.y - m_ColliderScale.y / 2.f)
+		, (int)(vPos.x + m_ColliderScale.x / 2.f)
+		, (int)(vPos.y + m_ColliderScale.y / 2.f));
 }
 
 CCollider::CCollider()
@@ -57,12 +59,14 @@ CCollider::~CCollider()
 void CCollider::CollisionBeginOverlap(CCollider* _pOtherCollider)
 {
 	++m_iCollisionCount;
+	GetOwnerObject()->CollisionBeginOverlap(_pOtherCollider);
 }
 
-// 충졸 중
+// 충돌 중
 void CCollider::CollisionOverlap(CCollider* _pOtherCollider)
 {
-
+	m_iCollisionCount;
+	GetOwnerObject()->CollisionOverlap(_pOtherCollider);
 }
 
 
@@ -70,4 +74,5 @@ void CCollider::CollisionOverlap(CCollider* _pOtherCollider)
 void CCollider::CollisionEndOverlap(CCollider* _pOtherCollider)
 {
 	--m_iCollisionCount;
-}
+	GetOwnerObject()->CollisionEndOverlap(_pOtherCollider);
+} 

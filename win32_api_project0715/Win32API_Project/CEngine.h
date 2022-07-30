@@ -1,4 +1,5 @@
 ﻿#pragma once
+class CImage;
 
 class CEngine
 {
@@ -10,9 +11,14 @@ private:
 
 	//윈도우 해상도 설정
 	POINT m_pResolution;
+	CImage* m_pBackBuffer; // (백버퍼) 이중 버퍼 용도
 
-	HBITMAP m_hSecondBitmap; // 두번째 비트맵
-	HDC m_hSecondDC; // 두번쩨 DC
+	//HBITMAP m_hSecondBitmap; // 두번째 비트맵
+	//HDC m_hSecondDC; // 두번쩨 DC  -> CImage와 CResMgt 에서 처리
+
+
+
+
 
 	HPEN m_arrPen[(UINT)PEN_COLOR::END];
 	HBRUSH m_arrBrush[(UINT)BRUSH_COLOR::END];

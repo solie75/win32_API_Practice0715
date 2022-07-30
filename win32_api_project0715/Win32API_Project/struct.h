@@ -18,6 +18,22 @@ public:
 		this->y += _vOther.y;
 	}
 
+	void operator = (POINT _pt)
+	{
+		this->x = (float)_pt.x;
+		this->y = (float)_pt.y;
+	}
+
+	Vector operator / (float _f)
+	{
+		return Vector(x / _f, y / _f);
+	}
+
+	Vector operator - (Vector _vOther)
+	{
+		return Vector(x - _vOther.x, y - _vOther.y);
+	}
+
 public:
 	Vector()
 		: x(0.f)
@@ -28,6 +44,13 @@ public:
 
 	Vector(float _x, float _y)
 		: x(_x), y(_y)
+	{
+
+	}
+
+	Vector(POINT _pt)
+		: x((float)_pt.x)
+		, y((float)_pt.y)
 	{
 
 	}

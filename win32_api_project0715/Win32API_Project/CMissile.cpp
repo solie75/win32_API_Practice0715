@@ -37,8 +37,9 @@ void CMissile::ObjTick()
 
 void CMissile::ObjRender(HDC _dc)
 {
-	Vec MissilePos = GetPos();
-	Vec MissileScale = GetScale();
+	//Vec MissilePos = GetPos();
+	Vec MissilePos = CCameraMgr::GetInst()->GetRenderPos(GetPos());
+	//Vec MissileScale = GetScale();
 
 	//  현재 _dc 의 GDIOBJ 를 변환하는 코드
 	/*tSelectBrush b(_dc, BRUSH_COLOR::GRAY);

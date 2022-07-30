@@ -1,5 +1,6 @@
 #pragma once
 #include "CEntity.h"
+#include "CCameraMgr.h"
 
 class CComponent;
 class CCollider;
@@ -25,16 +26,16 @@ public:
 		m_vScale = _vScale;
 	}
 
-	Vec GetPos()
+	Vec GetPos() const
 	{
 		return m_vPos;
 	}
-	Vec GetScale()
+	Vec GetScale() const
 	{
 		return m_vScale;
 	} 
 
-	CCollider* GetCollider() { return (CCollider*)m_arrComponent[(UINT)COMPONENT_TYPE::COLLIDER]; }
+	CCollider* GetCollider() const { return (CCollider*)m_arrComponent[(UINT)COMPONENT_TYPE::COLLIDER]; }
 	//CAnimator* GetAnimator() { return (CCollider*)m_arrComponent[(UINT)COMPONENT_TYPE::ANIMATOR]; }
 	//CGravity* GetGravity() { return (CCollider*)m_arrComponent[(UINT)COMPONENT_TYPE::GRAVITY]; }
 
@@ -44,6 +45,11 @@ public:
 	virtual void ObjTick();
 	virtual void ObjRender(HDC _dc);
 
+	// 충돌이벤트
+	virtual void CollisionBeginOverlap(CCollider* _pOhterCollider) {};
+	virtual void CollisionOverlap(CCollider* _pOhterCollider) {};
+	virtual void CollisionEndOverlap(CCollider* _pOhterCollider) {};
+
 public:
 	// 순수 가상함수로 사용하던 Tick() 을 CObject 에서 사용해야 함에 따라 대체할 순수가상 함수를 임시로 만듦
 	// 순수 가상함수가 존재 해야 하는 이유 -> CObject 클래스로는 객체를 만들 수 없다.
@@ -51,6 +57,6 @@ public:
 
 public:
 	CObject();
-	~CObject();
+	virtual ~CObject();
 };
 

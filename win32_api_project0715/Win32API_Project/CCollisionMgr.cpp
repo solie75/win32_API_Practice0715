@@ -43,61 +43,74 @@ void CCollisionMgr::CollisionBtwLayer(CScene* _pCurScene, LAYER_TYPE _layer1, LA
 		{
 			continue;
 		}
-		for (size_t j = 0; j < vecObj2.size(); ++j)
+
+		size_t j = 0;
+		if (_layer1 == _layer2)
+		{
+			j = i + 1; // 동일한 벡터를 만들지 않기 위해서.
+		}
+
+		for (; j < vecObj2.size(); ++j)
 		{
 			// 두 객체가 동일하거나 vecObj2에 충돌체가 없는경우
-			if (vecObj1[i] == vecObj2[j] || nullptr == vecObj2[j]->GetCollider()) // 자기 자신과 충돌하는 것으로 계산되는 경우
+			if ( nullptr == vecObj2[j]->GetCollider()) // 자기 자신과 충돌하는 것으로 계산되는 경우
 			{
 				continue;
 			}
 
-			// 두 객체가 상이하며 각각 모두 충돌체가 있는경우
+			CollisionBtwCollider(vecObj1[i]->GetCollider(), vecObj2[j]->GetCollider());
+			
+		}
+	}
+}
+
+void CCollisionMgr::CollisionBtwCollider(CCollider* _pFirst, CCollider* _pSecond)
+{
+	// 두 객체가 상이하며 각각 모두 충돌체가 있는경우
 			// 두 충돌체의 ID 확인
-			COLLIDER_ID id;
-			id.FIRST_ID = vecObj1[i]->GetCollider()->GetID();
-			id.SECOND_ID = vecObj2[j]->GetCollider()->GetID();
-			// COLLIDER_ID는 union 으로 하나의 연결된 메모리 집단으로 이루어져있다. 
-			// FIRST_ID 는 8바이트 인 ID 의 앞의  4바이트를 , SECOND_ID는 뒤의 4바이트를 구성하고 있디.
-			// 따라서 이때 ID는 메모리 적으로 보았을 때 프로그램 내에 유일한 키값이 된다.
-			id.ID;
+	COLLIDER_ID id;
+	id.FIRST_ID = _pFirst->GetID();
+	id.SECOND_ID = _pSecond->GetID();
+	// COLLIDER_ID는 union 으로 하나의 연결된 메모리 집단으로 이루어져있다. 
+	// FIRST_ID 는 8바이트 인 ID 의 앞의  4바이트를 , SECOND_ID는 뒤의 4바이트를 구성하고 있디.
+	// 따라서 이때 ID는 메모리 적으로 보았을 때 프로그램 내에 유일한 키값이 된다.
+	id.ID;
 
-			// 이전 충돌 정보를 검색한다.
-			// map 의 bool 은 충돌의 여부 를 의미한다.
-			map<LONGLONG,bool>::iterator CollisionInfoIter = m_mapColInfo.find(id.ID);
-			// 충돌 정보가 아예 없는 경우 만들어 준다.
-			if (CollisionInfoIter == m_mapColInfo.end())
-			{
-				m_mapColInfo.insert(make_pair(id.ID, false));
-				// 추가 해준뒤 다시 검색하여 CollisionInfoIter에 담기게 한다.
-				CollisionInfoIter = m_mapColInfo.find(id.ID);
-			}
+	// 이전 충돌 정보를 검색한다.
+	// map 의 bool 은 충돌의 여부 를 의미한다.
+	map<LONGLONG, bool>::iterator CollisionInfoIter = m_mapColInfo.find(id.ID);
+	// 충돌 정보가 아예 없는 경우 만들어 준다.
+	if (CollisionInfoIter == m_mapColInfo.end())
+	{
+		m_mapColInfo.insert(make_pair(id.ID, false));
+		// 추가 해준뒤 다시 검색하여 CollisionInfoIter에 담기게 한다.
+		CollisionInfoIter = m_mapColInfo.find(id.ID);
+	}
 
-			if (IsCollision(vecObj1[i]->GetCollider(), vecObj2[j]->GetCollider()))
-			{
-				// 현재 프레임에 충돌이 시작되는 경우
-				if (false == CollisionInfoIter->second)
-				{
-					vecObj1[i]->GetCollider()->CollisionBeginOverlap(vecObj2[j]->GetCollider());
-					vecObj2[j]->GetCollider()->CollisionBeginOverlap(vecObj1[i]->GetCollider());
-					CollisionInfoIter->second = true;
-				}
-				else
-				{
-					// 전에도 충돌하고 현재에도 충돌하고 있는 경우
-					vecObj1[i]->GetCollider()->CollisionOverlap(vecObj2[j]->GetCollider());
-					vecObj2[j]->GetCollider()->CollisionOverlap(vecObj1[i]->GetCollider());
-				}
-			}
-			else 
-			{
-				// 충돌을 막 벗어아는 지섬
-				if (CollisionInfoIter->second)
-				{
-					vecObj1[i]->GetCollider()->CollisionEndOverlap(vecObj2[j]->GetCollider());
-					vecObj2[j]->GetCollider()->CollisionEndOverlap(vecObj1[i]->GetCollider());
-					CollisionInfoIter->second = false;
-				}
-			}
+	if (IsCollision(_pFirst, _pSecond))
+	{
+		// 현재 프레임에 충돌이 시작되는 경우
+		if (false == CollisionInfoIter->second)
+		{
+			_pFirst->CollisionBeginOverlap(_pSecond);
+			_pSecond->CollisionBeginOverlap(_pFirst);
+			CollisionInfoIter->second = true;
+		}
+		else
+		{
+			// 전에도 충돌하고 현재에도 충돌하고 있는 경우
+			_pFirst->CollisionOverlap(_pSecond);
+			_pSecond->CollisionOverlap(_pFirst);
+		}
+	}
+	else
+	{
+		// 충돌을 막 벗어아는 지점
+		if (CollisionInfoIter->second)
+		{
+			_pFirst->CollisionEndOverlap(_pSecond);
+			_pSecond->CollisionEndOverlap(_pFirst);
+			CollisionInfoIter->second = false;
 		}
 	}
 }

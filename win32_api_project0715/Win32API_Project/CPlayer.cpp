@@ -89,7 +89,10 @@ void CPlayer::ObjRender(HDC _dc) // 여기에서 들어오는 dc 는 SecondDC 이다.
 		return;
 	}
 
-	Vec vPos = GetPos();
+	//Vec vPos = GetPos();
+ 
+	Vec vPos = CCameraMgr::GetInst()->GetRenderPos(GetPos());
+
 	//BitBlt(_dc, (int)vPos.x - 61, (int)vPos.y - 62, 123, 124, pImage->GetImageDC(), 0, 0, SRCCOPY);
 	TransparentBlt(_dc, (int)vPos.x - pImage->GetWidth() / 2, (int)vPos.y - pImage->GetHeight() / 2
 		, pImage->GetWidth(), pImage->GetHeight()
@@ -98,4 +101,9 @@ void CPlayer::ObjRender(HDC _dc) // 여기에서 들어오는 dc 는 SecondDC 이다.
 	// 자신의 컴포넌트들이 화면에 그려질수 도 있으니 부모 쪽의 랜더를 호출해준다.
 	CObject::ObjRender(_dc);
 
+}
+
+void CPlayer::CollisionBeginOverlap(CCollider* _pOtherCollider)
+{
+	_pOtherCollider->GetOwnerObject();
 }

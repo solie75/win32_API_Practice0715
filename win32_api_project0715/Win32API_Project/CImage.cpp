@@ -46,4 +46,31 @@ int CImage::Load(const wstring& _strFilePath)
 	return S_OK;
 }
 
+int CImage::Create(UINT _iWidth, UINT _iHeight)
+{
+	// 이중 버퍼링
+	// 윈도우 해상도와 동일한 크기의 비트맵을 생성
+	// 새로 생선한 비트맵을 가리키는 전용 DC 생성
+	// 새로 생성한 비트맵과 DC를 서로 연결
+	HDC hMainDC = CEngine::GetInst()->GetMainDC();
+	m_hBit = CreateCompatibleBitmap(hMainDC, _iWidth, _iHeight);
+	m_hDC = CreateCompatibleDC(hMainDC);
 
+	if (0 == m_hBit || 0 == m_hDC)
+	{
+		return E_FAIL;
+	}
+
+	// DC 를 생성하면 임의로 1픽셀의 비트맵을 가리키고 있기에 SelectObject 의 반환값을 삭제해 주어야 한다.
+	HBITMAP hDefaultBitmap = (HBITMAP)SelectObject(m_hDC, m_hBit);
+	DeleteObject(hDefaultBitmap);
+
+	// 비트맵 정보 확인
+	BITMAP tBitInfo = {};
+	GetObject(m_hBit, sizeof(BITMAP), &tBitInfo);
+
+	m_iWidth = tBitInfo.bmWidth;
+	m_iHeight = tBitInfo.bmHeight;
+
+	return S_OK;
+}

@@ -8,20 +8,22 @@
 #include "CPathMgr.h"
 #include "CResMgr.h"
 #include "CCollisionMgr.h"
+#include "CCameraMgr.h"
+#include "CImage.h"
 
 CEngine::CEngine()
 	: m_hMainWnd(0)
 	, m_hDC(0)
-	, m_pResolution()
-	, m_hSecondBitmap(0)
-	, m_hSecondDC(0)
+	//, m_pResolution()
+	/*, m_hSecondBitmap(0)
+	, m_hSecondDC(0)*/
 {
 }
 CEngine::~CEngine() 
 {
 	ReleaseDC(m_hMainWnd, m_hDC);
-	DeleteDC(m_hSecondDC);
-	DeleteObject(m_hSecondBitmap);
+	/*DeleteDC(m_hSecondDC);
+	DeleteObject(m_hSecondBitmap);*/
 
 	// 펜 삭제
 	for (UINT i = 0; i < (UINT)PEN_COLOR::END; ++i)
@@ -53,15 +55,8 @@ void CEngine::EngineInit(HWND _hWnd, UINT _Width, UINT _Height)
 	CreateDefaultGDIObject();
 
 	// 이중 버퍼링
-	// 윈도우 해상도와 동일한 크기의 비트맵을 생성
-	// 새로 생선한 비트맵을 가리키는 전용 DC 생성
-	// 새로 생성한 비트맵과 DC를 서로 연결
-
-	m_hSecondBitmap = CreateCompatibleBitmap(m_hDC, m_pResolution.x, m_pResolution.y);
-	m_hSecondDC =  CreateCompatibleDC(m_hDC);
-	// DC 를 생성하면 임의로 1픽셀의 비트맵을 가리키고 있기에 SelectObject 의 반환값을 삭제해 주어야 한다.
-	HBITMAP hDefaultBitmap = (HBITMAP)SelectObject(m_hSecondDC, m_hSecondBitmap);
-	DeleteObject(hDefaultBitmap);
+	m_pBackBuffer = CResMgr::GetInst()->CreateImage(L"BackBuffer", m_pResolution.x, m_pResolution.y);
+	
 
 	// Mgr 초기화
 	CPathMgr::GetInst()->PathMgrInit();
@@ -69,6 +64,8 @@ void CEngine::EngineInit(HWND _hWnd, UINT _Width, UINT _Height)
 	CTimeMgr::GetInst()->TimeMgrInit();
 	CKeyMgr::GetInst()->KeyMgrInit();
 	CResMgr::GetInst()->ResMgrInit();
+	CCameraMgr::GetInst()->CameraMgrInit();
+	
 }
 
 void CEngine::EngineTick()
@@ -90,21 +87,24 @@ void CEngine::EngineTick()
 	CKeyMgr::GetInst()->KeyMgrTick();
 	CSceneMgr::GetInst()->CSceneMgrTick();
 	CCollisionMgr::GetInst()->CollisionMgrTick();
+	CCameraMgr::GetInst()->CameraMgrTick();
 
 
 	// 렌더링
 	// clear 부분
-	HBRUSH hPrevBrush = (HBRUSH)SelectObject(m_hSecondDC, m_arrBrush[(UINT)BRUSH_COLOR::GRAY]);
-	Rectangle(m_hSecondDC, -1, -1, m_pResolution.x + 1, m_pResolution.y + 1); // 이렇게 되면 세컨드 비트맵 화면 전체가 clear 된다.
+	HBRUSH hPrevBrush = (HBRUSH)SelectObject(m_pBackBuffer->GetImageDC(), m_arrBrush[(UINT)BRUSH_COLOR::GRAY]);
+	Rectangle(m_pBackBuffer->GetImageDC(), -1, -1, m_pResolution.x + 1, m_pResolution.y + 1); // 이렇게 되면 세컨드 비트맵 화면 전체가 clear 된다.
 	// 굳이 기본이 흰색인 세컨드 비트맵 생성에 회색을 넣어주고 그에 대한 반환값의 기본의 흰색을 다시 세컨드 비트맵에 넣는이유는..?
-	SelectObject(m_hSecondDC, hPrevBrush);
+	SelectObject(m_pBackBuffer->GetImageDC(), hPrevBrush);
 
 	/*CSceneMgr::GetInst()->CSceneMgrRender(m_hDC);
 	CTimeMgr::GetInst()->TimeMgrRender(m_hDC);*/
-	CSceneMgr::GetInst()->CSceneMgrRender(m_hSecondDC);
-	CTimeMgr::GetInst()->TimeMgrRender(m_hSecondDC);
+	CSceneMgr::GetInst()->CSceneMgrRender(m_pBackBuffer->GetImageDC());
+	CTimeMgr::GetInst()->TimeMgrRender(m_pBackBuffer->GetImageDC());
+	CCameraMgr::GetInst()->CameraMgrRender(m_pBackBuffer->GetImageDC());
 
-	BitBlt(m_hDC, 0, 0, m_pResolution.x, m_pResolution.y, m_hSecondDC, 0, 0, SRCCOPY);
+
+	BitBlt(m_hDC, 0, 0, m_pResolution.x, m_pResolution.y, m_pBackBuffer->GetImageDC(), 0, 0, SRCCOPY);
 
 }
 

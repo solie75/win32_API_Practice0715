@@ -28,12 +28,26 @@ void CMonster::ObjTick()
 
 void CMonster::ObjRender(HDC _dc)
 {
-	Vec vPos = GetPos();
+	//Vec vPos = GetPos();
+	Vec vPos = CCameraMgr::GetInst()->GetRenderPos(GetPos());
 
-	TransparentBlt(_dc, (int)vPos.x - m_MonsterImage->GetWidth() / 2
+	/*TransparentBlt(_dc, (int)vPos.x - m_MonsterImage->GetWidth() / 2
 		, (int)vPos.y - m_MonsterImage->GetHeight() / 2
 		, m_MonsterImage->GetWidth(), m_MonsterImage->GetHeight()
-		, m_MonsterImage->GetImageDC(), 0, 0, m_MonsterImage->GetWidth(), m_MonsterImage->GetHeight(), RGB(255, 0, 255));
+		, m_MonsterImage->GetImageDC()
+		,0, 0, m_MonsterImage->GetWidth(), m_MonsterImage->GetHeight(), RGB(255, 0, 255));*/
+
+	BLENDFUNCTION tFunc = {};
+	tFunc.BlendOp = AC_SRC_OVER;
+	tFunc.BlendFlags = 0;
+	tFunc.SourceConstantAlpha = 127;
+	tFunc.AlphaFormat = AC_SRC_ALPHA;
+
+	AlphaBlend(_dc, (int)vPos.x - m_MonsterImage->GetWidth() / 2
+		, (int)vPos.y - m_MonsterImage->GetHeight() / 2
+		, m_MonsterImage->GetWidth(), m_MonsterImage->GetHeight()
+		, m_MonsterImage->GetImageDC(), 0, 0, m_MonsterImage->GetWidth()
+		, m_MonsterImage->GetHeight(), tFunc);
 
 	CObject::ObjRender(_dc);
 }

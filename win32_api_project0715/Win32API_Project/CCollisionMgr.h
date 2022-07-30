@@ -28,6 +28,7 @@ public:
 // CollisionMgrTick에서 호출할 함수이기 때문에 공개할 필요가 없다.
 private:
 	void CollisionBtwLayer(CScene* _pCurScene, LAYER_TYPE _layer1, LAYER_TYPE _layer2);
+	void CollisionBtwCollider(CCollider* _pFirst, CCollider* _pSecond);
 	bool IsCollision(CCollider* _collider1, CCollider* _collider2);
 public:
 	void Clear() { memset(m_matrix, 0, sizeof(WORD) * MAX_LAYER); }; // m_matrix 배열의 모든 비트를 0 으로 만든다.

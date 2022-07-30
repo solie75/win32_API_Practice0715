@@ -10,13 +10,32 @@ private:
     UINT m_iWidth;
     UINT m_iHeight;
 
-public:
+private:
     virtual int Load(const wstring& _strFilePath) override;
-    HDC GetImageDC() { return m_hDC; }
-    UINT GetWidth() { return m_iWidth; }
-    UINT GetHeight() { return m_iHeight; }
+    virtual int Create(UINT _iWidth, UINT _iHeight);
+
 public:
+    HDC GetImageDC() { return m_hDC; }
+    UINT GetWidth() 
+    {
+        if (nullptr != this)
+        {
+            return m_iWidth;
+        }
+        return 0;
+    }
+    UINT GetHeight() {
+        if (nullptr != this)
+        {
+            return m_iHeight;
+        }
+        return 0;
+    }
+
+private:
     CImage();
     ~CImage();
+
+    friend class CResMgr;
 };
 

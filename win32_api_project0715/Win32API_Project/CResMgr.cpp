@@ -58,6 +58,30 @@ CImage* CResMgr::LoadImg(const wstring& _strKey, const wstring& _strRelativePath
 	return pImage;
 }
 
+CImage* CResMgr::CreateImage(const wstring& _strKey, UINT _iWidth, UINT _iHeight)
+{
+	// 키값으로 탐색(중복된 키를 가지지 않도록)
+	CImage* pImage = FindImg(_strKey);
+	if (nullptr != pImage)
+	{
+		MessageBox(nullptr, L"중복 키 발생", L"이미지 생성 실패", MB_OK);
+		return nullptr;
+	}
+
+	// 해당 키로 생성된 이미지가 없는 경우
+	pImage = new CImage;
+	if (FAILED(pImage->Create(_iWidth, _iHeight)))
+	{
+		MessageBox(nullptr, L"이미지 생성 실패", L"에러", MB_OK);
+		return nullptr;
+	}
+
+	pImage->SetKey(_strKey);
+	m_mapImage.insert(make_pair(_strKey, pImage));
+
+	return pImage;
+}
+
 
 CImage* CResMgr::FindImg(const wstring& _strKey)
 {

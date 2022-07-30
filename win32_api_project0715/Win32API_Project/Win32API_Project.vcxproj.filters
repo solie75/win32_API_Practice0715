@@ -83,6 +83,9 @@
     <Filter Include="default">
       <UniqueIdentifier>{c1cdf4bd-4527-48a0-b716-d8894822628e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\02.Manager\08.CameraMgr">
+      <UniqueIdentifier>{ccc89e12-68fb-45b4-82bb-d5a18bf429b4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -163,6 +166,9 @@
     <ClInclude Include="CEntity.h">
       <Filter>Game</Filter>
     </ClInclude>
+    <ClInclude Include="CCameraMgr.h">
+      <Filter>Game\02.Manager\08.CameraMgr</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Win32API_Project.rc">
@@ -235,6 +241,9 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="CEntity.cpp">
       <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="CCameraMgr.cpp">
+      <Filter>Game\02.Manager\08.CameraMgr</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

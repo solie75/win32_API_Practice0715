@@ -7,6 +7,7 @@
 #include <list>
 #include <map>
 #include <assert.h>
+#include <crtdbg.h>
 
 using std::vector;
 using std::list;
