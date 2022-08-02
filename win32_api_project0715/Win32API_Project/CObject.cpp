@@ -54,6 +54,7 @@ void CObject::ObjRender(HDC _dc)
 CObject::CObject()
 // 처음에 객체가 생성될 때에는 아직 어떠한 컴포넌트를 객체가 가질 지 모르기 때문에 모든 요소를 nullptr로 초기화 한다.
 	: m_arrComponent{}
+	, m_DeadState(false)
 {
 }
 

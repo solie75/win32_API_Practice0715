@@ -12,9 +12,6 @@ CCameraMgr::CCameraMgr()
 	: m_pTargetObj(nullptr)
 	, m_pVeil(nullptr)
 	, m_fAlpha(1.f)
-	, m_fAccTime(0.f)
-	, m_fMaxTime(5.f)
-	, m_eEffect(CAM_EFFECT::FADE_IN)
 {
 	POINT ptResol = CEngine::GetInst()->GetResolution();
 	m_pVeil = CResMgr::GetInst()->CreateImage(L"Veil", ptResol.x, ptResol.y);
@@ -55,18 +52,33 @@ void CCameraMgr::CameraMgrTick()
 		m_vLook = m_pTargetObj->GetPos();
 	}
 
-	if (m_fAccTime <= 5.f)
+	// 처리할 카메라 효과가 있다면
+	if (!m_CameraEffectInfoList.empty())
 	{
-		m_fAccTime += DT;
-		float fRatio =  m_fAccTime / m_fMaxTime; // 제한 시간 대비 진행 시간의 비율을 0~ 1 사이로 환산
+		CameraEffectInfo& info = m_CameraEffectInfoList.front(); // 카메라 효과 리스트의 맨 앞 노드를 참조한다.
 
-		if (CAM_EFFECT::FADE_IN == m_eEffect)
+		info.m_fAccTime += DT; // 현재 조건에서 DT의 거듭 합인  m_fAccTime 이 미세하게  m_fDuration 을 넘을 수 있다.
+		float fRatio = (info. m_fAccTime / info.m_fDuration); // 제한 시간 대비 진행 시간의 비율을 0~ 1 사이로 환산
+
+		if (1.f < fRatio)
 		{
-			m_fAlpha = 1.f - fRatio;
+			fRatio = 1.f; //  m_fAccTime 이 m_fDuration 을 살짝 초과 하는 경우를 대비하여 최대 제한 시간 대비 진행 시간의 비율을 1로 고정한다.
+			m_CameraEffectInfoList.pop_front();
 		}
 		else
 		{
-			m_fAlpha = fRatio;
+			if (CAM_EFFECT::FADE_IN == info.m_eEffect)
+			{
+				m_fAlpha = 1.f - fRatio;
+			}
+			else if (CAM_EFFECT::FADE_OUT == info.m_eEffect)
+			{
+				m_fAlpha = fRatio;
+			}
+			else
+			{
+				m_fAlpha = 0.f;
+			}
 		}
 	}
 

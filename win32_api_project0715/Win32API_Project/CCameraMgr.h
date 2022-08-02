@@ -7,6 +7,14 @@ enum class CAM_EFFECT
 {
 	FADE_IN,
 	FADE_OUT,
+	NONE,
+};
+
+struct CameraEffectInfo
+{
+	float m_fAccTime; // 누적 진행 시간
+	float m_fDuration; // 이펙트 총 재생 시간 
+	CAM_EFFECT m_eEffect; // 카메라 효과 타입
 };
 
 class CCameraMgr
@@ -24,10 +32,8 @@ private:
 	// veil
 	CImage* m_pVeil; // 가림막 용도  BitmapImage 생성
 	float m_fAlpha; // 투명 강도
-	float m_fAccTime; // 누적 진행 시간
-	float m_fMaxTime; // 제한 시간
 
-	CAM_EFFECT m_eEffect; // 카메라 효과 타입
+	list<CameraEffectInfo> m_CameraEffectInfoList;
 
 public:
 	void CameraMgrInit();
@@ -42,6 +48,19 @@ public:
 	void SetTargetObject(CObject* _pObj)
 	{
 		m_pTargetObj = _pObj;
+	}
+
+	void SetCameraEffect(CAM_EFFECT _type, float _fDuration)
+	{
+		CameraEffectInfo info = {};
+		info.m_eEffect = _type;
+		info.m_fDuration = _fDuration;
+
+		m_CameraEffectInfoList.push_back(info);
+
+		//m_eEffect = _type; // 어떤 효과인지
+		//m_fAccTime = 0; // 카메라 효과 시작시에 누적 진행 시간은 0이다.
+		//m_fDuration = _fDuration; // 총 걸리는 시간
 	}
 
 

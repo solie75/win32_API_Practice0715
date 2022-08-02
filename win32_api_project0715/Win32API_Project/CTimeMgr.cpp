@@ -18,7 +18,7 @@ CTimeMgr::~CTimeMgr()
 
 void CTimeMgr::TimeMgrInit()
 {
-	// 성능 카운터의 빈도를 검색. lpFreaquency = 현재 성능 카운터, 타이머의 주파수를 반환한다.
+	// 성능 카운터의 빈도를 검색. lpFreaquency = 현재 성능 카운터, 타이머의 주파수(1초에 각 타이머의 성능에 맞는 진동수)를 반환한다.
 	QueryPerformanceFrequency(&m_Frequence);
 	// 시간 간격 측정에 사용할 수 있는 고해상도 타임 스탬프인 성능 카운터의 현재 값을 검색한다. (현재 CPU 의 틱을 받아오는 것)
 	// lpPerformanceCounter = 매개변수로 현재 성능 카운터 값을 게수로 받는 변수에 대한 포인터를 넘겨준다.
@@ -27,9 +27,15 @@ void CTimeMgr::TimeMgrInit()
 
 void CTimeMgr::TimeMgrTick()
 {
+	// 여기에서 m_CurCount 는 LARGE_INTEGER 타입이다.
+	// LARGE_INTEGER 타입은 LowPart(하위 32 비트 DWORD 형)과 HighPart(상위 32 비트 Long)형으로 구성되며
+	// 실제 데이타 값은  QURDPART (64비트의 signed interg형)으로 되어있다.
 	QueryPerformanceCounter(&m_CurCount);
 
+	// 현재까지의 누적된 카운터에 지난 프레임의 누적 카운터를 빼서 한 프레임 사이의 카운터를 구한다.
+	// 그 한 프레임의 카운터 를 
 	m_DeltaTime = (float)(m_CurCount.QuadPart - m_PrevCount.QuadPart) / (float)(m_Frequence.QuadPart);
+	// deltaTime 은 ' 각 컴퓨터의 성능에 따라 FPS 가 다름으로써 생기는 값의 차이를 없애기 위한 값' 이다.
 
 	m_PrevCount.QuadPart = m_CurCount.QuadPart;
 }

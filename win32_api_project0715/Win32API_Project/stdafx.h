@@ -20,6 +20,7 @@ using std::wstring;
 #include "def.h"
 #include "CEngine.h"
 #include "struct.h"
+#include "func.h"
 
 
 #pragma comment(lib, "Msimg32.lib")

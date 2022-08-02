@@ -10,6 +10,7 @@
 #include "CResMgr.h"
 #include "CCollider.h"
 #include "CAnimator.h"
+#include "CEventMgr.h"
 
 CPlayer::CPlayer()
 	: m_fSpeed(200.f)
@@ -53,7 +54,7 @@ void CPlayer::ObjTick()
 	{
 		if (m_AccTime >= 0.1f)
 		{
-			CScene* pCurScene = CSceneMgr::GetInst()->GetCurScene();
+			/*CScene* pCurScene = CSceneMgr::GetInst()->GetCurScene();
 			CMissile* pMissile = new CMissile;
 
 			pMissile->SetPos(GetPos());
@@ -61,9 +62,23 @@ void CPlayer::ObjTick()
 
 			pCurScene->AddObject( pMissile, LAYER_TYPE::PLAYER_PROJECTILE);
 
+			m_AccTime = 0.f;*/
+			// 기존의 player.cpp 에서 eventmgr를 사용하는 것으로 변경
+
+			CMissile* pMissile = new CMissile;
+			pMissile->SetPos(GetPos() + Vec(0.f, -50.f));// CPlayer 객체의 위치를 기준으로 더함
+
+			tEventInfo info = {};
+			info.eType = EVENT_TYPE::CREATE_OBJECT;
+			info.first = (DWORD_PTR)pMissile;
+			info.second = (DWORD_PTR)LAYER_TYPE::PLAYER_PROJECTILE;
+			// 이벤트 추가
+
+			CEventMgr::GetInst()->AddEvent(info);
+
 			m_AccTime = 0.f;
+
 		}
-		
 	}
 
 	SetPos(vPos);

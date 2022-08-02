@@ -10,6 +10,7 @@
 #include "CCollisionMgr.h"
 #include "CCameraMgr.h"
 #include "CImage.h"
+#include "CEventMgr.h"
 
 CEngine::CEngine()
 	: m_hMainWnd(0)
@@ -105,6 +106,10 @@ void CEngine::EngineTick()
 
 
 	BitBlt(m_hDC, 0, 0, m_pResolution.x, m_pResolution.y, m_pBackBuffer->GetImageDC(), 0, 0, SRCCOPY);
+
+	// EventMgr
+	// 해당 프레임의 이벤트를 쌓아 놓고 다음 프레임에 넘긴다.
+	CEventMgr::GetInst()->EventMgrTick();
 
 }
 

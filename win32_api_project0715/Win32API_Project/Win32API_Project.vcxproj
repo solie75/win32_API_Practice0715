@@ -150,6 +150,7 @@
     <ClInclude Include="CComponent.h" />
     <ClInclude Include="CEngine.h" />
     <ClInclude Include="CEntity.h" />
+    <ClInclude Include="CEventMgr.h" />
     <ClInclude Include="CImage.h" />
     <ClInclude Include="CKeyMgr.h" />
     <ClInclude Include="CMissile.h" />
@@ -164,6 +165,7 @@
     <ClInclude Include="CScene_Logo.h" />
     <ClInclude Include="CTimeMgr.h" />
     <ClInclude Include="framework.h" />
+    <ClInclude Include="func.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="def.h" />
     <ClInclude Include="stdafx.h" />
@@ -179,6 +181,7 @@
     <ClCompile Include="CComponent.cpp" />
     <ClCompile Include="CEngine.cpp" />
     <ClCompile Include="CEntity.cpp" />
+    <ClCompile Include="CEventMgr.cpp" />
     <ClCompile Include="CImage.cpp" />
     <ClCompile Include="CKeyMgr.cpp" />
     <ClCompile Include="CMissile.cpp" />
@@ -192,6 +195,7 @@
     <ClCompile Include="CSceneMgr.cpp" />
     <ClCompile Include="CScene_Logo.cpp" />
     <ClCompile Include="CTimeMgr.cpp" />
+    <ClCompile Include="func.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>

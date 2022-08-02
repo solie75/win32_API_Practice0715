@@ -4,6 +4,7 @@
 #include "CResMgr.h"
 #include "CImage.h"
 #include "CCollider.h"
+#include "CEventMgr.h"
 
 CMonster::CMonster()
 	: m_MonsterImage(nullptr)
@@ -24,6 +25,8 @@ CMonster::~CMonster()
 void CMonster::ObjTick()
 {
 	CObject::ObjTick();
+
+	IsValid(m_pPlayer);
 }
 
 void CMonster::ObjRender(HDC _dc)
@@ -50,4 +53,12 @@ void CMonster::ObjRender(HDC _dc)
 		, m_MonsterImage->GetHeight(), tFunc);
 
 	CObject::ObjRender(_dc);
+}
+
+void CMonster::CollisionBeginOverlap(CCollider* _pOhterCollider)
+{
+	tEventInfo info = {};
+	info.eType = EVENT_TYPE::DELETE_OBJECT;
+	info.first = (DWORD_PTR)this;
+	CEventMgr::GetInst()->AddEvent(info);
 }

@@ -86,6 +86,9 @@
     <Filter Include="Game\02.Manager\08.CameraMgr">
       <UniqueIdentifier>{ccc89e12-68fb-45b4-82bb-d5a18bf429b4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\02.Manager\09.EventMgr">
+      <UniqueIdentifier>{61c454f5-8bda-4f0e-b3d0-6ca4aab1a59b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -169,6 +172,12 @@
     <ClInclude Include="CCameraMgr.h">
       <Filter>Game\02.Manager\08.CameraMgr</Filter>
     </ClInclude>
+    <ClInclude Include="CEventMgr.h">
+      <Filter>Game\02.Manager\09.EventMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="func.h">
+      <Filter>Game\00.Header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Win32API_Project.rc">
@@ -244,6 +253,12 @@
     </ClCompile>
     <ClCompile Include="CCameraMgr.cpp">
       <Filter>Game\02.Manager\08.CameraMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="CEventMgr.cpp">
+      <Filter>Game\02.Manager\09.EventMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="func.cpp">
+      <Filter>Game\00.Header</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
