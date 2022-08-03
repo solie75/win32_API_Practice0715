@@ -1,5 +1,7 @@
 #pragma once
 
+class CObject;
+
 enum class EVENT_TYPE
 {
 	CREATE_OBJECT, // first : object ptr, second : layer
@@ -25,6 +27,7 @@ class CEventMgr
 
 private:
 	vector<tEventInfo> m_vecEvent;
+	vector<CObject*> m_vecDeadObject;
 public:
 	void EventMgrTick();
 	void AddEvent(const tEventInfo& _event)

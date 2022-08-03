@@ -37,7 +37,10 @@ public:
 		return m_vScale;
 	}
 
-	bool IsDead() const { return m_DeadState; }
+	bool IsDead() const 
+	{
+		return m_DeadState;
+	}
 
 	CCollider* GetCollider() const { return (CCollider*)m_arrComponent[(UINT)COMPONENT_TYPE::COLLIDER]; }
 	//CAnimator* GetAnimator() { return (CCollider*)m_arrComponent[(UINT)COMPONENT_TYPE::ANIMATOR]; }
@@ -62,10 +65,10 @@ public:
 private:
 	void SetDead() { m_DeadState = true; }
 
-	friend class CEventMgr;
-
 public:
 	CObject();
 	virtual ~CObject();
+
+	friend class CEventMgr;
 };
 

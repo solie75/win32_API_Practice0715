@@ -89,6 +89,9 @@
     <Filter Include="Game\02.Manager\09.EventMgr">
       <UniqueIdentifier>{61c454f5-8bda-4f0e-b3d0-6ca4aab1a59b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\05.Component\Animator\Animation">
+      <UniqueIdentifier>{a9bcb1a3-a592-41da-8480-be680a2ed2ce}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -178,6 +181,9 @@
     <ClInclude Include="func.h">
       <Filter>Game\00.Header</Filter>
     </ClInclude>
+    <ClInclude Include="CAnimation.h">
+      <Filter>Game\05.Component\Animator\Animation</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Win32API_Project.rc">
@@ -259,6 +265,9 @@
     </ClCompile>
     <ClCompile Include="func.cpp">
       <Filter>Game\00.Header</Filter>
+    </ClCompile>
+    <ClCompile Include="CAnimation.cpp">
+      <Filter>Game\05.Component\Animator\Animation</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -10,14 +10,6 @@ private:\
 	type();\
 	~type();
 
-enum SCENE_TYPE
-{
-	LOGO,
-	START,
-	STAGE_01,
-	END,
-};
-
 #define DT CTimeMgr::GetInst()->GetDeltaTime()
 
 #define IsPressed(KEY) KEY_STATE::PRESS == CKeyMgr::GetInst()->GetKeyState(KEY)
@@ -25,6 +17,17 @@ enum SCENE_TYPE
 #define IsRelease(KEY) KEY_STATE::RELEASE == CKeyMgr::GetInst()->GetKeyState(KEY)
 
 #define SAFE_DELETE(p) if(nullptr != p){delete p; p = nullptr;}
+
+// Layer
+#define MAX_LAYER 16
+
+enum SCENE_TYPE
+{
+	LOGO,
+	START,
+	STAGE_01,
+	END,
+};
 
 enum class PEN_COLOR
 {
@@ -52,8 +55,7 @@ enum class COMPONENT_TYPE
 	END,
 };
 
-// Layer
-#define MAX_LAYER 16
+
 
 enum class LAYER_TYPE
 {

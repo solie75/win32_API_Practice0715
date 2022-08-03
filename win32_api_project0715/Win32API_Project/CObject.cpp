@@ -2,6 +2,29 @@
 #include "CObject.h"
 #include "CComponent.h"
 
+CObject::CObject()
+// 처음에 객체가 생성될 때에는 아직 어떠한 컴포넌트를 객체가 가질 지 모르기 때문에 모든 요소를 nullptr로 초기화 한다.
+	: m_arrComponent{}
+	, m_DeadState(false)
+{
+}
+
+CObject::~CObject()
+{
+	// 객체는 컴포넌트의 주솟값을 가지고 있기 때문에 따로 지워주어야 한다.
+	for (UINT i = 0; i < (UINT)COMPONENT_TYPE::END; ++i)
+	{
+		// 다음 구문이 많이 쓰이기 때문에 매크로화 해준다.
+		/*if (nullptr != m_arrComponent[i])
+		{
+			delete m_arrComponent[i];
+		}*/
+		SAFE_DELETE(m_arrComponent[i]);
+	}
+
+}
+
+
 // 객체가 새롭게 컴포넌트를 생성하면 기존의 객체가 가지고 있던 컴포넌트 배열에 컴포넌트를 넣는다.
 void CObject::AddComponent(CComponent* _pComponent)
 {
@@ -51,24 +74,3 @@ void CObject::ObjRender(HDC _dc)
 	 }
 }
 
-CObject::CObject()
-// 처음에 객체가 생성될 때에는 아직 어떠한 컴포넌트를 객체가 가질 지 모르기 때문에 모든 요소를 nullptr로 초기화 한다.
-	: m_arrComponent{}
-	, m_DeadState(false)
-{
-}
-
-CObject::~CObject()
-{
-	// 객체는 컴포넌트의 주솟값을 가지고 있기 때문에 따로 지워주어야 한다.
-	for (UINT i = 0; i < (UINT)COMPONENT_TYPE::END; ++i)
-	{
-		// 다음 구문이 많이 쓰이기 때문에 매크로화 해준다.
-		/*if (nullptr != m_arrComponent[i])
-		{
-			delete m_arrComponent[i];
-		}*/
-		SAFE_DELETE(m_arrComponent[i]);
-	}
-
-}

@@ -84,11 +84,19 @@ void CEngine::EngineTick()
 
 
 	// 업데이트
+	// 매니저 업데이트
 	CTimeMgr::GetInst()->TimeMgrTick();
 	CKeyMgr::GetInst()->KeyMgrTick();
-	CSceneMgr::GetInst()->CSceneMgrTick();
-	CCollisionMgr::GetInst()->CollisionMgrTick();
 	CCameraMgr::GetInst()->CameraMgrTick();
+	
+	// Scene 업데이트
+	CSceneMgr::GetInst()->CSceneMgrTick();
+
+	// 충돌 검사
+	CCollisionMgr::GetInst()->CollisionMgrTick();
+	// 함수 자체는 collider 에게 줬지만 그 collider 가 본인을 소유하고 있는 object 쪽으로 다시 가상함수를 재호출
+	// 시켜서 각 object 클라스 쪽에 override 시켜 놓은 beginoverlap, overlap, endoverlap 이 상황에 맞게 들어 온다.
+
 
 
 	// 렌더링

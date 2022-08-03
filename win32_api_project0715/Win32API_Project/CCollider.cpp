@@ -3,7 +3,18 @@
 #include "CObject.h" // Object의 Pos 와 Scale을 알기 위해 선언
 #include "CEngine.h"
 
+CCollider::CCollider()
+// CCollider 의 생성자는 부모 클라스인 CComponent의 생성자를 호출한다.
+// 이때 CComponent는 기본생성자 없이 인자를 가지는 생성자 만이 존재 하므로 그 인자를 가지는 생성자를 상속받는다고 표시한다.
+// 밑의 코드는 CCollider 클래스의 생성자가 부모 크래스인 CComponent 클래스의 생성자를 상속 받았다는 것이다.
+	: CComponent(COMPONENT_TYPE::COLLIDER)
+	, m_iCollisionCount(0)
+{
+}
 
+CCollider::~CCollider()
+{
+}
 
 void CCollider::ComponentTick()
 {
@@ -42,30 +53,17 @@ void CCollider::ComponentRender(HDC _dc)
 		, (int)(vPos.y + m_ColliderScale.y / 2.f));
 }
 
-CCollider::CCollider()
-// CCollider 의 생성자는 부모 클라스인 CComponent의 생성자를 호출한다.
-// 이때 CComponent는 기본생성자 없이 인자를 가지는 생성자 만이 존재 하므로 그 인자를 가지는 생성자를 상속받는다고 표시한다.
-// 밑의 코드는 CCollider 클래스의 생성자가 부모 크래스인 CComponent 클래스의 생성자를 상속 받았다는 것이다.
-	: CComponent(COMPONENT_TYPE::COLLIDER)
-	, m_iCollisionCount(0)
-{
-}
-
-CCollider::~CCollider()
-{
-}
-
 // 충돌 시작
 void CCollider::CollisionBeginOverlap(CCollider* _pOtherCollider)
 {
 	++m_iCollisionCount;
+
 	GetOwnerObject()->CollisionBeginOverlap(_pOtherCollider);
 }
 
 // 충돌 중
 void CCollider::CollisionOverlap(CCollider* _pOtherCollider)
 {
-	m_iCollisionCount;
 	GetOwnerObject()->CollisionOverlap(_pOtherCollider);
 }
 
@@ -74,5 +72,6 @@ void CCollider::CollisionOverlap(CCollider* _pOtherCollider)
 void CCollider::CollisionEndOverlap(CCollider* _pOtherCollider)
 {
 	--m_iCollisionCount;
+
 	GetOwnerObject()->CollisionEndOverlap(_pOtherCollider);
 } 

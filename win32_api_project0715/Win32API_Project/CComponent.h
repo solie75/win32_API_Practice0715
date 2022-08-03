@@ -16,9 +16,7 @@ private:
 
 public:
 	virtual void ComponentTick() = 0;
-
-	// 충돌영역과 같이 보여야 할 경우가 있으므로.
-	virtual void ComponentRender(HDC _dc);
+	virtual void ComponentRender(HDC _dc) {};
 
 	COMPONENT_TYPE GetComponentType() { return m_eType; };
 

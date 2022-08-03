@@ -52,12 +52,13 @@ void CCollisionMgr::CollisionBtwLayer(CScene* _pCurScene, LAYER_TYPE _layer1, LA
 
 		for (; j < vecObj2.size(); ++j)
 		{
-			// 두 객체가 동일하거나 vecObj2에 충돌체가 없는경우
-			if ( nullptr == vecObj2[j]->GetCollider()) // 자기 자신과 충돌하는 것으로 계산되는 경우
+			//vecObj2에 충돌체가 없는경우
+			if ( nullptr == vecObj2[j]->GetCollider())
 			{
 				continue;
 			}
 
+			// 두 객체가 충돌체가 있는 경우
 			CollisionBtwCollider(vecObj1[i]->GetCollider(), vecObj2[j]->GetCollider());
 			
 		}
@@ -74,7 +75,6 @@ void CCollisionMgr::CollisionBtwCollider(CCollider* _pFirst, CCollider* _pSecond
 	// COLLIDER_ID는 union 으로 하나의 연결된 메모리 집단으로 이루어져있다. 
 	// FIRST_ID 는 8바이트 인 ID 의 앞의  4바이트를 , SECOND_ID는 뒤의 4바이트를 구성하고 있디.
 	// 따라서 이때 ID는 메모리 적으로 보았을 때 프로그램 내에 유일한 키값이 된다.
-	id.ID;
 
 	// 이전 충돌 정보를 검색한다.
 	// map 의 bool 은 충돌의 여부 를 의미한다.
@@ -87,25 +87,42 @@ void CCollisionMgr::CollisionBtwCollider(CCollider* _pFirst, CCollider* _pSecond
 		CollisionInfoIter = m_mapColInfo.find(id.ID);
 	}
 
+	// 두 충돌체 중 하나 이상의 Dead 상태인가
+	bool IsDead = _pFirst->GetOwnerObject()->IsDead() || _pSecond->GetOwnerObject()->IsDead(); // 둘 중 하나만 dead  상태여도  true
+
+	// 현재 충돌중인지 검사한다
 	if (IsCollision(_pFirst, _pSecond))
 	{
 		// 현재 프레임에 충돌이 시작되는 경우
 		if (false == CollisionInfoIter->second)
 		{
-			_pFirst->CollisionBeginOverlap(_pSecond);
-			_pSecond->CollisionBeginOverlap(_pFirst);
-			CollisionInfoIter->second = true;
+			// 삭제 예정이 아닌 경우에만 beginOverlap 이 가능
+			if (!IsDead)
+			{
+				_pFirst->CollisionBeginOverlap(_pSecond);
+				_pSecond->CollisionBeginOverlap(_pFirst);
+				CollisionInfoIter->second = true;
+			}
 		}
+		// 전 프레임에서 충돌중이었던 경우
 		else
 		{
+			// 삭제 예정인 경우, 충돌을 해제 진행
+			if (IsDead)
+			{
+				_pFirst->CollisionEndOverlap(_pFirst);
+				_pSecond->CollisionEndOverlap(_pSecond);
+				CollisionInfoIter->second = false;
+			}
 			// 전에도 충돌하고 현재에도 충돌하고 있는 경우
 			_pFirst->CollisionOverlap(_pSecond);
 			_pSecond->CollisionOverlap(_pFirst);
 		}
 	}
+	// 충돌하지 않은 경우
 	else
 	{
-		// 충돌을 막 벗어아는 지점
+		// 충돌을 막 벗어나는 지점
 		if (CollisionInfoIter->second)
 		{
 			_pFirst->CollisionEndOverlap(_pSecond);
@@ -175,4 +192,3 @@ void CCollisionMgr::CollisionLayerRelease(LAYER_TYPE _Layer1, LAYER_TYPE _Layer2
 
 	m_matrix[iRow] &= ~(1 << iCol);
 }
-

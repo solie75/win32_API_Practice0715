@@ -52,7 +52,7 @@ void CPlayer::ObjTick()
 	}
 	if (IsPressed(KEY_TYPE::SPACE))
 	{
-		if (m_AccTime >= 0.1f)
+		if (m_AccTime >= 0.2f)
 		{
 			/*CScene* pCurScene = CSceneMgr::GetInst()->GetCurScene();
 			CMissile* pMissile = new CMissile;

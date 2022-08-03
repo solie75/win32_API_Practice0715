@@ -5,9 +5,11 @@
 #include "CImage.h"
 #include "CCollider.h"
 #include "CEventMgr.h"
+#include "CMissile.h"
 
 CMonster::CMonster()
 	: m_MonsterImage(nullptr)
+	, m_pPlayer(nullptr)
 {
 	AddComponent(new CCollider);
 
@@ -26,7 +28,7 @@ void CMonster::ObjTick()
 {
 	CObject::ObjTick();
 
-	IsValid(m_pPlayer);
+	//IsValid(m_pPlayer);
 }
 
 void CMonster::ObjRender(HDC _dc)
@@ -57,8 +59,15 @@ void CMonster::ObjRender(HDC _dc)
 
 void CMonster::CollisionBeginOverlap(CCollider* _pOhterCollider)
 {
-	tEventInfo info = {};
-	info.eType = EVENT_TYPE::DELETE_OBJECT;
-	info.first = (DWORD_PTR)this;
-	CEventMgr::GetInst()->AddEvent(info);
+	// 다운캐스팅을 했는데 충돌체의 오브젝트가 미사일 포인터까지 다운캐스팅이 가능하다는 것은 진짜 정체가 미사일이라는 소리
+	// 여기에서 다운캐스팅을 사용하는 이유는?
+
+	
+	if (dynamic_cast<CMissile*>(_pOhterCollider->GetOwnerObject()))
+	{
+		tEventInfo info = {};
+		info.eType = EVENT_TYPE::DELETE_OBJECT;
+		info.first = (DWORD_PTR)this;
+		CEventMgr::GetInst()->AddEvent(info);
+	}
 }

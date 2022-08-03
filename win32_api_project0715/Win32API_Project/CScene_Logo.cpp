@@ -25,6 +25,8 @@ void CScene_Logo::SceneInit()
 	
 
 	// 충돌 체크 (각 Scene 에서 체크할 충돌을 정의)
+	CCollisionMgr::GetInst()->Clear();
+
 	CCollisionMgr::GetInst()->CollisionLayerCheck(LAYER_TYPE::PLAYER, LAYER_TYPE::MONSTER);
 	CCollisionMgr::GetInst()->CollisionLayerCheck(LAYER_TYPE::PLAYER_PROJECTILE, LAYER_TYPE::MONSTER);
 	CCollisionMgr::GetInst()->CollisionLayerCheck(LAYER_TYPE::MONSTER, LAYER_TYPE::MONSTER);

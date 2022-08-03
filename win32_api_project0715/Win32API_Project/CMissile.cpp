@@ -48,9 +48,11 @@ void CMissile::ObjRender(HDC _dc)
 	//Vec vPos = GetPos();
 	//BitBlt(_dc, (int)vPos.x - 61, (int)vPos.y - 62, 123, 124, pImage->GetImageDC(), 0, 0, SRCCOPY);
 
-	TransparentBlt(_dc, (int)MissilePos.x -( MissileImage->GetWidth() / 2), (int)MissilePos.y - (MissileImage->GetHeight() / 2)
+	TransparentBlt(_dc, (int)MissilePos.x - MissileImage->GetWidth() / 2
+		, (int)MissilePos.y - MissileImage->GetHeight() / 2
 		, MissileImage->GetWidth(), MissileImage->GetHeight()
-		, MissileImage->GetImageDC(), 0, 0, MissileImage->GetWidth(), MissileImage->GetHeight(), RGB(255, 0, 255));
+		, MissileImage->GetImageDC(), 0, 0, MissileImage->GetWidth()
+		, MissileImage->GetHeight(), RGB(255, 0, 255));
 	
 	CObject::ObjRender(_dc);
 }

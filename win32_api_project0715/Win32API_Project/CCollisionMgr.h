@@ -31,7 +31,10 @@ private:
 	void CollisionBtwCollider(CCollider* _pFirst, CCollider* _pSecond);
 	bool IsCollision(CCollider* _collider1, CCollider* _collider2);
 public:
-	void Clear() { memset(m_matrix, 0, sizeof(WORD) * MAX_LAYER); }; // m_matrix 배열의 모든 비트를 0 으로 만든다.
+	void Clear() {
+		memset(m_matrix, 0, sizeof(WORD) * MAX_LAYER);  // m_matrix 배열의 모든 비트를 0 으로 만든다.
+		m_mapColInfo.clear();
+	};
 	void CollisionLayerCheck(LAYER_TYPE _Layer1, LAYER_TYPE _Layer2);
 	void CollisionLayerRelease(LAYER_TYPE _Layer1, LAYER_TYPE _Layer2);
 };

@@ -20,7 +20,7 @@ public:
 
 	Vec m_ColliderFinalPos; // 충돌체의 최종 위치
 
-	int m_iCollisionCount; // 충돌 횟수
+	size_t m_iCollisionCount; // 충돌 횟수
 
 public:
 	void SetColliderScale(Vec _vScale) { m_ColliderScale = _vScale; };

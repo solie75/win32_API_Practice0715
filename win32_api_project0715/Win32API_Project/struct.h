@@ -24,6 +24,12 @@ public:
 		this->y = (float)_pt.y;
 	}
 
+	void operator -= (Vector _vOther)
+	{
+		x -= _vOther.x;
+		y -= _vOther.y;
+	}
+
 	Vector operator / (float _f)
 	{
 		return Vector(x / _f, y / _f);
@@ -67,6 +73,12 @@ private:
 	HPEN m_hPrevPen;
 
 public:
+	void SetPenColor(PEN_COLOR _color)
+	{
+		m_hPrevPen = (HPEN)SelectObject(m_hDC, CEngine::GetInst()->GetPen(_color));
+	}
+
+public:
 	tSelectPen(HDC _dc)
 		: m_hDC(_dc)
 		, m_hPrevPen(0)
@@ -82,10 +94,7 @@ public:
 		m_hPrevPen = (HPEN)SelectObject(m_hDC, CEngine::GetInst()->GetPen(_color));
 	}
 
-	void SetPenColor(PEN_COLOR _color)
-	{
-		m_hPrevPen = (HPEN)SelectObject(m_hDC, CEngine::GetInst()->GetPen(_color));
-	}
+	
 
 	~tSelectPen()
 	{
