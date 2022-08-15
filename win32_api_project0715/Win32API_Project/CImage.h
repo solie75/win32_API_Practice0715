@@ -32,7 +32,7 @@ public:
         return 0;
     }
 
-private:
+public:
     CImage();
     ~CImage();
 

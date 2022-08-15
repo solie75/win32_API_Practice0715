@@ -4,6 +4,8 @@
 
 class CComponent;
 class CCollider;
+class CAnimator;
+class CRigidBody;
 
 class CObject
 	: public CEntity
@@ -43,8 +45,8 @@ public:
 	}
 
 	CCollider* GetCollider() const { return (CCollider*)m_arrComponent[(UINT)COMPONENT_TYPE::COLLIDER]; }
-	//CAnimator* GetAnimator() { return (CCollider*)m_arrComponent[(UINT)COMPONENT_TYPE::ANIMATOR]; }
-	//CGravity* GetGravity() { return (CCollider*)m_arrComponent[(UINT)COMPONENT_TYPE::GRAVITY]; }
+	CAnimator* GetAnimator() const { return (CAnimator*)m_arrComponent[(UINT)COMPONENT_TYPE::ANIMATOR]; }
+	CRigidBody* GetRigidBody() const { return (CRigidBody*)m_arrComponent[(UINT)COMPONENT_TYPE::RIGIDBODY]; }
 
 	void AddComponent(CComponent* _pComponent);
 	

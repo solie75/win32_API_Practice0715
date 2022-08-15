@@ -65,6 +65,7 @@ void CEngine::EngineInit(HWND _hWnd, UINT _Width, UINT _Height)
 	CTimeMgr::GetInst()->TimeMgrInit();
 	CKeyMgr::GetInst()->KeyMgrInit();
 	CResMgr::GetInst()->ResMgrInit();
+
 	CCameraMgr::GetInst()->CameraMgrInit();
 	
 }

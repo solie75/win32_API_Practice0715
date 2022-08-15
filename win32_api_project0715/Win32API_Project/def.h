@@ -21,6 +21,8 @@ private:\
 // Layer
 #define MAX_LAYER 16
 
+#define PI 3.14159265f
+
 enum SCENE_TYPE
 {
 	LOGO,
@@ -49,8 +51,10 @@ enum class BRUSH_COLOR
 
 enum class COMPONENT_TYPE
 {
-	COLLIDER,
+	// Component의 순서에 따라 화면에 표현된다.
 	ANIMATOR,
+	COLLIDER,
+	RIGIDBODY,
 	GRAVITY,
 	END,
 };
@@ -69,4 +73,13 @@ enum class LAYER_TYPE
 
 	UI = MAX_LAYER -1,
 	END = MAX_LAYER,
+};
+
+enum class EVENT_TYPE
+{
+	CREATE_OBJECT, // first : object ptr, second : layer
+	DELETE_OBJECT,
+	SCENE_CHANGE,
+
+	END,
 };

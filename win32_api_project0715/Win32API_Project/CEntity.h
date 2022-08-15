@@ -8,7 +8,7 @@ private:
 	const UINT m_ID;
 
 public:
-	void SetNAme(const wstring& _strName) { m_strName = _strName; }
+	void SetName(const wstring& _strName) { m_strName = _strName; }
 	const wstring& GetName() { return m_strName; }
 
 	UINT GetID() { return m_ID; }

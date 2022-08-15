@@ -15,12 +15,14 @@ CResMgr::CResMgr()
 
 CResMgr::~CResMgr()
 {
-	map<wstring, CImage*>::iterator iter = m_mapImage.begin();
+	/*map<wstring, CImage*>::iterator iter = m_mapImage.begin();
 
 	for (; iter != m_mapImage.end(); ++iter)
 	{
 		delete(iter->second);
-	}
+	}*/
+
+	Safe_Del_Map(m_mapImage);
 }
 
 void CResMgr::ResMgrInit()

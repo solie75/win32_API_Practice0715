@@ -7,6 +7,33 @@ public:
 	float y;
 
 public:
+
+	float Length() // 원점과 객체 사이의 길이
+	{
+		return sqrtf(x * x + y * y);
+	}
+
+	void Nomalize()
+	{
+		float fLenght = sqrtf(x* x + y * y);
+		x /= fLenght;
+		y /= fLenght;
+		// 이렇게 하면 방향은 똑같은데 길이를 1로 줄인 단위 벡터가 나오게 된다.
+	}
+
+	float Distance(Vector _vOther) // 두 벡터 사이의 거리
+	{
+		float _x = x - _vOther.x;
+		float _y = y - _vOther.y;
+
+		return sqrtf(_x * _x + _y * _y);
+	}
+
+	float Dot(Vector _vOther) // 단위 벡터를 가지고 내적을 구하는 함수.
+	{
+		return x * _vOther.x + y * _vOther.y;
+	}
+
 	Vector operator + (Vector _vOther)
 	{
 		return Vector(x += _vOther.x, y += _vOther.y);
@@ -30,9 +57,48 @@ public:
 		y -= _vOther.y;
 	}
 
+	Vector operator * (Vector _vOther)
+	{
+		return Vector(x * _vOther.x, y * _vOther.y);
+	}
+
+	Vector operator * (float _f)
+	{
+		return Vector(x * _f, y * _f);
+	}
+
+	void operator *= (Vector _vOther)
+	{
+		x *= _vOther.x, y *= _vOther.y;
+	}
+
+	void operator *= (float _f)
+	{
+		x *= _f, y *= _f;
+	}
+
+	Vector operator / (Vector _vOther)
+	{
+		assert(_vOther.x != 0.f && _vOther.y != 0.f);
+		return Vector(x / _vOther.x, y / _vOther.y);
+	}
+
 	Vector operator / (float _f)
 	{
+		assert(_f != 0.f);
 		return Vector(x / _f, y / _f);
+	}
+
+	void operator /= (Vector _vOther)
+	{
+		assert(_vOther.x != 0.f && _vOther.y != 0.f);
+		x /= _vOther.x, y /= _vOther.y;
+	}
+
+	void operator /= (float _f)
+	{
+		assert(_f != 0.f);
+		x /= _f, y /= _f;
 	}
 
 	Vector operator - (Vector _vOther)
@@ -94,8 +160,6 @@ public:
 		m_hPrevPen = (HPEN)SelectObject(m_hDC, CEngine::GetInst()->GetPen(_color));
 	}
 
-	
-
 	~tSelectPen()
 	{
 		SelectObject(m_hDC, m_hPrevPen);
@@ -129,4 +193,11 @@ public:
 	}
 };
 
+struct tEventInfo
+{
+	EVENT_TYPE eType;
+	DWORD_PTR first;
+	DWORD_PTR second;
+
+};
 

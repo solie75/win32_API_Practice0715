@@ -20,7 +20,7 @@ void CScene_Logo::SceneInit()
 	AddObject(Monster1, LAYER_TYPE::MONSTER);
 
 	// cameraEffect
-	CCameraMgr::GetInst()->SetCameraEffect(CAM_EFFECT::FADE_OUT, 1.f);
+	//CCameraMgr::GetInst()->SetCameraEffect(CAM_EFFECT::FADE_OUT, 1.f);
 	CCameraMgr::GetInst()->SetCameraEffect(CAM_EFFECT::FADE_IN, 1.f);
 	
 

@@ -152,6 +152,7 @@
     <ClInclude Include="CEngine.h" />
     <ClInclude Include="CEntity.h" />
     <ClInclude Include="CEventMgr.h" />
+    <ClInclude Include="CGuidedMissile.h" />
     <ClInclude Include="CImage.h" />
     <ClInclude Include="CKeyMgr.h" />
     <ClInclude Include="CMissile.h" />
@@ -161,6 +162,7 @@
     <ClInclude Include="CPlayer.h" />
     <ClInclude Include="CResMgr.h" />
     <ClInclude Include="CResource.h" />
+    <ClInclude Include="CRigidBody.h" />
     <ClInclude Include="CScene.h" />
     <ClInclude Include="CSceneMgr.h" />
     <ClInclude Include="CScene_Logo.h" />
@@ -184,6 +186,7 @@
     <ClCompile Include="CEngine.cpp" />
     <ClCompile Include="CEntity.cpp" />
     <ClCompile Include="CEventMgr.cpp" />
+    <ClCompile Include="CGuidedMissile.cpp" />
     <ClCompile Include="CImage.cpp" />
     <ClCompile Include="CKeyMgr.cpp" />
     <ClCompile Include="CMissile.cpp" />
@@ -193,6 +196,7 @@
     <ClCompile Include="CPlayer.cpp" />
     <ClCompile Include="CResMgr.cpp" />
     <ClCompile Include="CResource.cpp" />
+    <ClCompile Include="CRigidBody.cpp" />
     <ClCompile Include="CScene.cpp" />
     <ClCompile Include="CSceneMgr.cpp" />
     <ClCompile Include="CScene_Logo.cpp" />

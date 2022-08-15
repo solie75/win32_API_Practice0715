@@ -92,6 +92,12 @@
     <Filter Include="Game\05.Component\Animator\Animation">
       <UniqueIdentifier>{a9bcb1a3-a592-41da-8480-be680a2ed2ce}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\04.Object\Missile\GuidedMissile">
+      <UniqueIdentifier>{62666008-49a1-444e-b8da-b3a327808dbf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\05.Component\RigidBody">
+      <UniqueIdentifier>{711c6eea-1946-4086-b68f-2559b4b2e0b9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -184,6 +190,12 @@
     <ClInclude Include="CAnimation.h">
       <Filter>Game\05.Component\Animator\Animation</Filter>
     </ClInclude>
+    <ClInclude Include="CGuidedMissile.h">
+      <Filter>Game\04.Object\Missile\GuidedMissile</Filter>
+    </ClInclude>
+    <ClInclude Include="CRigidBody.h">
+      <Filter>Game\05.Component\RigidBody</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Win32API_Project.rc">
@@ -268,6 +280,12 @@
     </ClCompile>
     <ClCompile Include="CAnimation.cpp">
       <Filter>Game\05.Component\Animator\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="CGuidedMissile.cpp">
+      <Filter>Game\04.Object\Missile\GuidedMissile</Filter>
+    </ClCompile>
+    <ClCompile Include="CRigidBody.cpp">
+      <Filter>Game\05.Component\RigidBody</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

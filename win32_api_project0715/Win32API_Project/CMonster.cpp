@@ -65,9 +65,12 @@ void CMonster::CollisionBeginOverlap(CCollider* _pOhterCollider)
 	
 	if (dynamic_cast<CMissile*>(_pOhterCollider->GetOwnerObject()))
 	{
-		tEventInfo info = {};
+		/*tEventInfo info = {};
 		info.eType = EVENT_TYPE::DELETE_OBJECT;
 		info.first = (DWORD_PTR)this;
-		CEventMgr::GetInst()->AddEvent(info);
+		CEventMgr::GetInst()->AddEvent(info);*/
+
+		// guidedMissile 실험을 위해 주석처리
+		//DeleteObject(this);
 	}
 }
