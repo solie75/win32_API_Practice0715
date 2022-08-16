@@ -8,17 +8,28 @@ public:
 
 public:
 
+	bool IsZero()
+	{
+		if (0.f == x && 0.f == y)
+		{
+			return true;
+		}
+		return false;
+	}
+
 	float Length() // 원점과 객체 사이의 길이
 	{
 		return sqrtf(x * x + y * y);
 	}
 
-	void Nomalize()
+	Vector& Normalize()
 	{
 		float fLenght = sqrtf(x* x + y * y);
 		x /= fLenght;
 		y /= fLenght;
 		// 이렇게 하면 방향은 똑같은데 길이를 1로 줄인 단위 벡터가 나오게 된다.
+
+		return *this;
 	}
 
 	float Distance(Vector _vOther) // 두 벡터 사이의 거리
@@ -49,6 +60,11 @@ public:
 	{
 		this->x = (float)_pt.x;
 		this->y = (float)_pt.y;
+	}
+
+	Vector operator - ()
+	{
+		return Vector(-x, -y);
 	}
 
 	void operator -= (Vector _vOther)

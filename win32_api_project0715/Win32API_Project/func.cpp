@@ -13,7 +13,7 @@ Vec RotateVector(Vec _vOrigin, float _Degree)
 {
 	float fRadian = (_Degree / 180.f) * PI; //회전하고 싶은 각도를 radian화 한것
 
-	_vOrigin.Nomalize();
+	_vOrigin.Normalize();
 
 
 

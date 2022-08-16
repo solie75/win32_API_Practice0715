@@ -67,8 +67,8 @@ void CGuidedMissile::ObjTick()
 		Vec vDirToMon = vMonPos - vMissilePos;  // 타겟에 대한 this의 벡터
 		Vec vMissileDir = GetDir(); // 단위 벡터로 정리되어 있는 this의 백터를 가져온다.(이사일이 원래 나아가고자 하는 방향에 대한 벡터)
 
-		vDirToMon.Nomalize();
-		vMissileDir.Nomalize(); // 단위 벡터화가 안되어 있는 경우를 대비하여
+		vDirToMon.Normalize();
+		vMissileDir.Normalize(); // 단위 벡터화가 안되어 있는 경우를 대비하여
 
 		float fDot = vMissileDir.Dot(vDirToMon); // 미사일의 원래 벡터와 카겟에 대한 벡터의 내적
 		float fAngle = acosf(fDot); 

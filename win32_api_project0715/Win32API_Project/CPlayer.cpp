@@ -49,22 +49,22 @@ void CPlayer::ObjTick()
 	if(IsPressed(KEY_TYPE::UP))
 	{
 		//vPos.y -= m_fSpeed * DT;
-		GetRigidBody()->AddForce(Vec(0.f, -100.f));
+		GetRigidBody()->AddForce(Vec(0.f, -200.f));
 	}
 	if (IsPressed(KEY_TYPE::DOWN))
 	{
 		//vPos.y += m_fSpeed * DT;
-		GetRigidBody()->AddForce(Vec(0.f, 100.f));
+		GetRigidBody()->AddForce(Vec(0.f, 200.f));
 	}
 	if (IsPressed(KEY_TYPE::LEFT))
 	{
 		//vPos.x -= m_fSpeed * DT;
-		GetRigidBody()->AddForce(Vec(-100.f, 0.f));
+		GetRigidBody()->AddForce(Vec(-200.f, 0.f));
 	}
 	if (IsPressed(KEY_TYPE::RIGHT))
 	{
 		//vPos.x += m_fSpeed * DT;
-		GetRigidBody()->AddForce(Vec(100.f, 0.f));
+		GetRigidBody()->AddForce(Vec(200.f, 0.f));
 	}
 	
 	// IsTap으로 해 놓는 경우 두개의 키를 동시에 누르고 떼면 마지막에 Tap 된 키의 애니메이션이 play 되고있다.

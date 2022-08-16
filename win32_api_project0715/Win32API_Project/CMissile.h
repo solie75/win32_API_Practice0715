@@ -20,7 +20,7 @@ public:
     void SetDir(Vec _vDir)
     { 
         m_vDir = _vDir;
-        m_vDir.Nomalize();
+        m_vDir.Normalize();
     }
 
     Vec GetDir() { return m_vDir; }
