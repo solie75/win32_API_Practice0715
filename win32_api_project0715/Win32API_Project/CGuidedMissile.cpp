@@ -73,6 +73,8 @@ void CGuidedMissile::ObjTick()
 		float fDot = vMissileDir.Dot(vDirToMon); // 미사일의 원래 벡터와 카겟에 대한 벡터의 내적
 		float fAngle = acosf(fDot); 
 		// 미사일의 진행방향과 몬스터를 향하는 방향 사이의 각도를 구한다.(역함수 개념 이용)
+		fAngle = (fAngle / PI) * 180.f; // Radian to Degree
+		
 		float fRotateAngle = m_fRotateSpeed * DT; // 회전 각도 크기
 
 		// 이때 마사일의 회전 각도 크기는 이 fAngle 보다 작아야 한다.

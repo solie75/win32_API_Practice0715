@@ -31,6 +31,7 @@ public:
 	void EngineTick();
 
 	HDC GetMainDC() { return m_hDC; }
+	HWND GetMainHwnd() { return m_hMainWnd; }
 	HPEN GetPen(PEN_COLOR _color) { return m_arrPen[(UINT)_color]; }
 	HBRUSH GetBrush(BRUSH_COLOR _color) { return m_arrBrush[(UINT)_color]; }
 

@@ -5,6 +5,19 @@
 #include "CEngine.h"
 #include "CCollisionMgr.h"
 #include "CCameraMgr.h"
+#include "CKeyMgr.h"
+#include "CCameraMgr.h"
+#include "CForce.h"
+
+
+CScene_Logo::CScene_Logo()
+{
+}
+
+CScene_Logo::~CScene_Logo()
+{
+}
+
 
 void CScene_Logo::SceneInit()
 {
@@ -30,4 +43,18 @@ void CScene_Logo::SceneInit()
 	CCollisionMgr::GetInst()->CollisionLayerCheck(LAYER_TYPE::PLAYER, LAYER_TYPE::MONSTER);
 	CCollisionMgr::GetInst()->CollisionLayerCheck(LAYER_TYPE::PLAYER_PROJECTILE, LAYER_TYPE::MONSTER);
 	CCollisionMgr::GetInst()->CollisionLayerCheck(LAYER_TYPE::MONSTER, LAYER_TYPE::MONSTER);
+}
+
+void CScene_Logo::SceneTick()
+{
+	CScene::SceneTick();
+	// 마우스 클릭한 위치에 Force 생성
+	if (IsTap(KEY_TYPE::LBTN))
+	{
+		Vec vMousePos = CKeyMgr::GetInst()->GetMousePos();
+		Vec vObjectPos = CCameraMgr::GetInst()->GetRealPos(vMousePos);
+
+		CForce* pForce = Instantiate<CForce>(vObjectPos, LAYER_TYPE::FORCE);
+		pForce->SetForceInfo(500.f, 400.f, 1.f);
+	}
 }

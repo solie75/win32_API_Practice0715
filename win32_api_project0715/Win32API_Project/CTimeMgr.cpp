@@ -38,6 +38,12 @@ void CTimeMgr::TimeMgrTick()
 	// deltaTime 은 ' 각 컴퓨터의 성능에 따라 FPS 가 다름으로써 생기는 값의 차이를 없애기 위한 값' 이다.
 
 	m_PrevCount.QuadPart = m_CurCount.QuadPart;
+
+	// 60프레임을 초과한 경우 강제 60프레임 고정
+	if ((1.f / 60.f) > m_DeltaTime)
+	{
+		m_DeltaTime = (1.f / 60.f);
+	}
 }
 
 void CTimeMgr::TimeMgrRender(HDC _dc)

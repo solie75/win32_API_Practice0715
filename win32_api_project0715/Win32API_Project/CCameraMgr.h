@@ -44,6 +44,11 @@ public:
 	{
 		return (_vRealPos - m_vDiff);
 	}
+	
+	Vec GetRealPos(Vec _vRenderPos)
+	{
+		return (_vRenderPos + m_vDiff);
+	}
 
 	void SetTargetObject(CObject* _pObj)
 	{

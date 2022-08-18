@@ -89,36 +89,69 @@ void CKeyMgr::KeyMgrInit()
 
 void CKeyMgr::KeyMgrTick()
 {
-	for (UINT i = 0; i < (UINT)KEY_TYPE::END; ++i)
+	// 현재 프로젝트의 윈도우가 포커스 되어 있는지에 대한 조건
+	if (GetFocus())
 	{
-		// 해당 키가 현재 눌려있다.
-		if (GetAsyncKeyState(vkarr[i]) & 0x8000)// 여기 GetAsyncKeyState 에 인자로 문자를 주어야 하기 때문에 위에 vkarr 을 만들어서 enum KEY_TYPE의 요소들을 문자로 바꿔주는 일을 하게 할것
+		for (UINT i = 0; i < (UINT)KEY_TYPE::END; ++i)
 		{
-			// 이전 프레임에도 눌려있다.
-			if (m_vecKey[i].bPrevPress)
+			// 해당 키가 현재 눌려있다.
+			if (GetAsyncKeyState(vkarr[i]) & 0x8000)// 여기 GetAsyncKeyState 에 인자로 문자를 주어야 하기 때문에 위에 vkarr 을 만들어서 enum KEY_TYPE의 요소들을 문자로 바꿔주는 일을 하게 할것
 			{
-				m_vecKey[i].kState = KEY_STATE::PRESS;
+				// 이전 프레임에도 눌려있다.
+				if (m_vecKey[i].bPrevPress)
+				{
+					m_vecKey[i].kState = KEY_STATE::PRESS;
+				}
+				else
+				{
+					m_vecKey[i].kState = KEY_STATE::TAP;
+				}
+				m_vecKey[i].bPrevPress = true;
 			}
+			// 해당 키가 현재 눌려 있지 않다.
 			else
 			{
-				m_vecKey[i].kState = KEY_STATE::TAP;
+				// 이전 프레임에는 눌렸었다.
+				if (m_vecKey[i].bPrevPress)
+				{
+					m_vecKey[i].kState = KEY_STATE::RELEASE;
+				}
+				// 이전 프레임에도 눌려있지 않았다.
+				else
+				{
+					m_vecKey[i].kState = KEY_STATE::NONE;
+				}
+				m_vecKey[i].bPrevPress = false;
 			}
-			m_vecKey[i].bPrevPress = true;
 		}
-		// 해당 키가 현재 눌려 있지 않다.
-		else
+
+		// 프로젝트 윈도우 창 내에서 마우스 좌표 알기
+		POINT ptMouse = {};
+		GetCursorPos(&ptMouse);
+		ScreenToClient(CEngine::GetInst()->GetMainHwnd(), &ptMouse);
+		m_vMousePos = ptMouse;
+	}
+
+	else
+	{
+		for (UINT i = 0; i < (UINT)KEY_TYPE::END; i++)
 		{
-			// 이전 프레임에는 눌렸었다.
-			if (m_vecKey[i].bPrevPress)
+		// 프레스가 되어 있는 키값에 윈도우가 포커스를 벗어났다면 바도 NONE 으로 하는 것이아니라 나머지 과정을 다 수행한 뒤에 NONE 이 되도록 해야한다.
+			// 예를 들어 press 일 때에는 눌린 상태 release 상태에서는 안 눌린 상태인 버튼을 구현한 다고 할 때,
+			// 눌린 상태에서 포커스가 벗어나 져 NONE이 된다면 버튼이 다시 윈도우가 포커스가 되고 누르고 있지 않은 상황임에도 눌려잇는 이미지 그대로 일 것이기 때문이다.
+			m_vecKey[i].kState;
+			m_vecKey[i].bPrevPress = false;
+			if (KEY_STATE::TAP == m_vecKey[i].kState || KEY_STATE::PRESS == m_vecKey[i].kState)
 			{
 				m_vecKey[i].kState = KEY_STATE::RELEASE;
 			}
-			// 이전 프레임에도 눌려있지 않았다.
-			else
-			{
+			else if (KEY_STATE::RELEASE == m_vecKey[i].kState)
+		{
 				m_vecKey[i].kState = KEY_STATE::NONE;
 			}
+
 			m_vecKey[i].bPrevPress = false;
 		}
 	}
+	
 }
